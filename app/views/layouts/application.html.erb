@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Test Sorcery</title>
+    <title>Hétic Courses</title>
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <header>
+      <h1>Hétic Courses</h1>
+    </header>
+
 
     <div id="nav">
       <% if current_user %>
@@ -21,7 +25,17 @@
       <p id="notice"><%= flash[:notice] %></p>
       <p id="alert"><%= flash[:alert] %></p>
     </div>
+    <div id="content">
+
+
     <%= yield %>
+  </div>
+    <div class="clear"></div>
+    <footer>
+      <p>
+        P2016 Hétic.
+      </p>
+    </footer>
 
   </body>
 </html>

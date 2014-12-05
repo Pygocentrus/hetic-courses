@@ -11,10 +11,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128092937) do
+ActiveRecord::Schema.define(version: 20141205140748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
+
+  create_table "courses", force: true do |t|
+    t.string   "title",            null: false
+    t.string   "description",      null: false
+    t.string   "level"
+    t.string   "location"
+    t.string   "video_link"
+    t.string   "slideshare_link"
+    t.string   "image_link"
+    t.integer  "categorie_id"
+    t.integer  "user_id"
+    t.integer  "participation_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "date"
+  end
+
+  create_table "like", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "participations", force: true do |t|
+    t.integer  "course_id"
+    t.integer  "user_id"
+    t.date     "date"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",            null: false
@@ -26,6 +79,11 @@ ActiveRecord::Schema.define(version: 20141128092937) do
     t.string   "first_name"
     t.string   "last_name"
     t.date     "birth_date"
+    t.string   "batch"
+    t.text     "short_bio"
+    t.string   "avatar"
+    t.string   "personal_link"
+    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

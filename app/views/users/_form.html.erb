@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.email_field :email %>
   </div>
   <!-- <div class="field">
     <%= f.label :crypted_password %><br>
@@ -42,6 +42,18 @@
   <div class="field">
     <%= f.label :birth_date %><br>
     <%= f.date_select :birth_date, :start_year => (Date.today.year - 70), :end_year => Date.today.year %>
+  </div>
+  <div class="field">
+    <%= f.label :personal_link %><br>
+    <%= f.url_field :personal_link %>
+  </div>
+  <div class="field">
+    <%= f.label :batch %><br>
+    <%= f.text_field :batch %>
+  </div>
+  <div class="field">
+    <%= f.label :short_bio %><br>
+    <%= f.text_area :short_bio %>
   </div>
   <div class="actions">
     <%= f.submit %>

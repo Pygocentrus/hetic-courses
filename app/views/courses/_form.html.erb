@@ -1,0 +1,67 @@
+<%= form_for(@course) do |f| %>
+  <% if @course.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @course.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Titre %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Niveau %><br>
+    <%= f.text_field :level %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Lieu %><br>
+    <%= f.text_field :location %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Lien vidéo" %><br>
+    <%= f.url_field :video_link %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Lien Slideshare" %><br>
+    <%= f.url_field :slideshare_link %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Lien image" %><br>
+    <%= f.url_field :image_link %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Catégorie" %><br>
+    <%= f.select(:categorie_id, Categorie.all.collect {|p| [ p.name, p.id ] }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Tags" %><br>
+    <%= f.select(:tags, Tag.all.collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 5 }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.datetime_select :date, :ampm => false, :minute_step => 15 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

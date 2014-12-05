@@ -1,11 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :require_login, only: [:index, :new, :create]
+  skip_before_filter :require_login, only: [:new, :create]
+
+  include ActionView::Helpers::TextHelper
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    # Formatting the description
+    @users = @users.map do |user|
+      user.short_bio = truncate(user.short_bio, length: 15, separator: ' ')
+      return user
+    end
   end
 
   # GET /users/1
@@ -71,6 +78,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :crypted_password, :salt, :user_name, :first_name, :last_name, :birth_date)
+      params.require(:user).permit(:email, :password, :password_confirmation, :crypted_password, :salt, :user_name, :first_name, :last_name, :birth_date, :batch, :avatar, :personal_link, :short_bio)
     end
 end

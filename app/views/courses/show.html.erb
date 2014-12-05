@@ -1,0 +1,39 @@
+
+<h1><%= @course.title %></h1>
+
+<div>
+  <span>
+    Par
+    <% @course.users.each_with_index do |user, index| %>
+      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.id) %>
+      <% if index < (@course.users.length - 1)  %>, <% end %>
+    <% end %>
+  </span>
+</div>
+
+<div>
+  Date: <%= @course.date.strftime("Le %d/%m/%Y à %H:%M") %>
+</div>
+
+<div>
+  Lieu: <%= @course.location %>
+</div>
+
+<div>
+  Catégorie: <%= link_to @course.categorie.name, category_path(@course.categorie.id) %>
+</div>
+
+<div>
+  Tags:
+  <% @course.tags.each_with_index do |tag, index| %>
+  <%= link_to tag.name, tag_path(tag.id) %>
+    <% if index < (@course.tags.length - 1)  %>, <% end %>
+  <% end %>
+</div>
+
+<p>
+  <%= @course.description %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>

@@ -1,6 +1,6 @@
-<h1>Listing courses</h1>
+<h1>Cours à venir</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Title</th>
@@ -18,9 +18,9 @@
         <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
         <td><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></td>
         <td><%= course.level %></td>
-        <td><%= link_to 'Show', course %></td>
-        <td><%= link_to 'Edit', edit_course_path(course) %></td>
-        <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Voir', course, :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Course', new_course_path %>
+<%= link_to 'Nouveau cours', new_course_path, :class => "btn btn-primary" %>

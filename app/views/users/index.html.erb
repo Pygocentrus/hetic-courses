@@ -1,17 +1,16 @@
-<h1>Listing users</h1>
+<h1>Liste des utilisateurs</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Email</th>
-      <th>User name</th>
-      <th>First name</th>
-      <th>Last name</th>
-      <th>Birth date</th>
-      <th>Batch</th>
-      <th>Personal link</th>
+      <th>Pseudo</th>
+      <th>Prénom</th>
+      <th>Nom</th>
+      <th>Date de naissance</th>
+      <th>Promotion</th>
       <th>Description</th>
-      <th colspan="3"></th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -22,13 +21,12 @@
         <td><%= user.user_name %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.birth_date %></td>
+        <td><%= user.birth_date.strftime("%d/%m/%Y") %></td>
         <td><%= user.batch %></td>
-        <td><%= user.personal_link %></td>
         <td><%= user.short_bio %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Voir', user, :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Modifier', edit_user_path(user), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Supprimer', user, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -36,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', new_user_path, :class => "btn btn-primary" %>

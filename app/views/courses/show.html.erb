@@ -1,6 +1,11 @@
 
 <h1><%= @course.title %></h1>
 
+<p>
+  <%= link_to 'Modifier', edit_course_path(@course) %> |
+  <%= link_to 'Précécent', courses_path %>
+</p>
+
 <div>
   <span>
     Par
@@ -34,6 +39,3 @@
 <p>
   <%= @course.description %>
 </p>
-
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>

@@ -11,57 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :Titre %><br>
-    <%= f.text_field :title %>
+  <div class="field form-group">
+    <%= f.text_field :title, placeholder: 'Titre' %>
   </div>
 
-  <div class="field">
-    <%= f.label :Niveau %><br>
-    <%= f.text_field :level %>
+  <div class="field form-group">
+    <%= f.text_field :level, placeholder: 'Niveau' %>
   </div>
 
-  <div class="field">
-    <%= f.label :Lieu %><br>
-    <%= f.text_field :location %>
+  <div class="field form-group">
+    <%= f.text_field :location, placeholder: 'Lieu' %>
   </div>
 
-  <div class="field">
-    <%= f.label "Lien vidéo" %><br>
-    <%= f.url_field :video_link %>
+  <div class="field form-group">
+    <%= f.url_field :video_link, placeholder: 'Lien vidéo' %>
   </div>
 
-  <div class="field">
-    <%= f.label "Lien Slideshare" %><br>
-    <%= f.url_field :slideshare_link %>
+  <div class="field form-group">
+    <%= f.url_field :slideshare_link, placeholder: 'Lien Slideshare' %>
   </div>
 
-  <div class="field">
-    <%= f.label "Lien image" %><br>
-    <%= f.url_field :image_link %>
+  <div class="field form-group">
+    <%= f.url_field :image_link, placeholder: 'Lien image' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label "Catégorie" %><br>
     <%= f.select(:categorie_id, Categorie.all.collect {|p| [ p.name, p.id ] }) %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label "Tags" %><br>
     <%= f.select(:tags, Tag.all.collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 5 }) %>
   </div>
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="field form-group">
+    <%= f.text_area :description, placeholder: 'Description' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :date %><br>
     <%= f.datetime_select :date, :ampm => false, :minute_step => 15 %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= submit_tag "Ajouter", class: "btn btn-primary" %>
   </div>
 <% end %>

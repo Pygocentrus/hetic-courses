@@ -1,6 +1,8 @@
-<h1>Editing course</h1>
+<h1>Modifier le cours</h1>
+
+<p>
+  <%= link_to 'Voir le cours', @course %> |
+  <%= link_to 'Précédent', courses_path %>
+</p>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @course %> |
-<%= link_to 'Back', courses_path %>

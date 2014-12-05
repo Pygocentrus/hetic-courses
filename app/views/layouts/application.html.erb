@@ -2,26 +2,52 @@
 <html>
   <head>
     <title>Test Sorcery</title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "bootstrap.min" %>
+    <%= javascript_include_tag "bootstrap.min" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
 
-    <div id="nav">
-      <% if current_user %>
-      <%= link_to "Edit Profile", edit_user_path(current_user.id) %>
-      <%= link_to "Logout", :logout, method: :post %>
-      <% else %>
-      <%= link_to "Register", new_user_path %> |
-      <%= link_to "Login", :login %>
-      <% end %>
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <%= link_to "Hetic courses", root_path, :class => "navbar-brand" %>
+        </div>
+        <div class="collapse navbar-collapse">
+          <% if current_user %>
+            <p class="navbar-text navbar-left">
+              <%= link_to "Cours", root_path, :class => "navbar-link" %>
+            </p>
+            <p class="navbar-text navbar-left">
+              <%= link_to "Utilisateurs", users_path, :class => "navbar-link" %>
+            </p>
+            <p class="navbar-text navbar-right">
+              <%= link_to "Mon profil", edit_user_path(current_user.id), :class => "navbar-link" %>
+            </p>
+            <p class="navbar-text navbar-right">
+              <%= link_to "Déconnexion", :logout, method: :post, :class => "navbar-link" %>
+            </p>
+          <% else %>
+            <p class="navbar-text navbar-right">
+              <%= link_to "Inscription", new_user_path, :class => "navbar-link" %>
+            </p>
+            <p class="navbar-text navbar-right">
+              <%= link_to "Connexion", :login, :class => "navbar-link" %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div>
+        <p id="notice" class="bg-success"><%= flash[:notice] %></p>
+        <p id="alert" class="bg-danger"><%= flash[:alert] %></p>
+      </div>
+
+      <%= yield %>
     </div>
-    <div>
-      <p id="notice"><%= flash[:notice] %></p>
-      <p id="alert"><%= flash[:alert] %></p>
-    </div>
-    <%= yield %>
 
   </body>
 </html>

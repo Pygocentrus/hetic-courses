@@ -11,39 +11,40 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+  <div class="field form-group">
+    <%= f.email_field :email, placeholder: "Email", class: "form-control" %>
   </div>
-  <!-- <div class="field">
-    <%= f.label :crypted_password %><br>
-    <%= f.text_field :crypted_password %>
-  </div> -->
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
+  <div class="field form-group">
+    <%= f.label "Mot de passe" %><br />
+    <%= f.password_field :password, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
+  <div class="field form-group">
+    <%= f.label "Confirmation du mot de passe" %><br />
+    <%= f.password_field :password_confirmation, class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :user_name %><br>
-    <%= f.text_field :user_name %>
+  <div class="field form-group">
+    <%= f.text_field :user_name, placeholder: "Pseudo", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  <div class="field form-group">
+    <%= f.text_field :first_name, placeholder: "Prénom", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+  <div class="field form-group">
+    <%= f.text_field :last_name, placeholder: "Nom", class: "form-control" %>
   </div>
-  <div class="field">
-    <%= f.label :birth_date %><br>
+  <div class="field form-group">
+    <%= f.label "Date de naissance" %><br>
     <%= f.date_select :birth_date, :start_year => (Date.today.year - 70), :end_year => Date.today.year %>
   </div>
+  <div class="field form-group">
+    <%= f.url_field :personal_link, placeholder: "Lien personnel", class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.text_field :batch, placeholder: "Promotion HETIC", class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.text_area :short_bio, placeholder: "Biographie", class: "form-control" %>
+  </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= submit_tag "Valider", class: "btn btn-primary" %>
   </div>
 <% end %>

@@ -1,11 +1,18 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :require_login, only: [:index, :new, :create]
+  skip_before_filter :require_login, only: [:new, :create]
+
+  include ActionView::Helpers::TextHelper
 
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    # Formatting the description
+    @users = @users.map do |user|
+      user.short_bio = truncate(user.short_bio, length: 15, separator: ' ')
+      return user
+    end
   end
 
   # GET /users/1
@@ -29,8 +36,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        # format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.html { redirect_to(:users, notice: 'User was successfully created') }
+        format.html { redirect_to(:users, notice: "Le compte a bien été ajouté.") }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -44,7 +50,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to @user, notice: 'Le compte a bien été modifié.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -58,7 +64,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Le compte a bien été supprimé.' }
       format.json { head :no_content }
     end
   end
@@ -71,6 +77,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :crypted_password, :salt, :user_name, :first_name, :last_name, :birth_date)
+      params.require(:user).permit(:email, :password, :password_confirmation, :crypted_password, :salt, :user_name, :first_name, :last_name, :birth_date, :batch, :avatar, :personal_link, :short_bio)
     end
 end

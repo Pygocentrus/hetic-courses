@@ -1,37 +1,31 @@
+<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+
+<p>
+  <%= link_to 'Modifier', edit_user_path(@user) %> |
+  <%= link_to 'Retour', users_path %>
+</p>
+
 <p>
   <strong>Email:</strong>
   <%= @user.email %>
 </p>
 
-<!-- <p>
-  <strong>Crypted password:</strong>
-  <%= @user.crypted_password %>
-</p>
-
 <p>
-  <strong>Salt:</strong>
-  <%= @user.salt %>
-</p> -->
-
-<p>
-  <strong>User name:</strong>
+  <strong>Pseudo:</strong>
   <%= @user.user_name %>
 </p>
 
 <p>
-  <strong>First name:</strong>
+  <strong>Prénom:</strong>
   <%= @user.first_name %>
 </p>
 
 <p>
-  <strong>Last name:</strong>
+  <strong>Nom:</strong>
   <%= @user.last_name %>
 </p>
 
 <p>
-  <strong>Birth date:</strong>
-  <%= @user.birth_date %>
+  <strong>Date de naissance:</strong>
+  <%= @user.birth_date.strftime("Le %d/%m/%Y") %>
 </p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

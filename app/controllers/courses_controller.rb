@@ -99,7 +99,7 @@ class CoursesController < ApplicationController
         :location, :video_link, :slideshare_link,
         :image_link, :user_id, :categorie_id,
         :tag_id, :tagging_id, :tags, :participation_id,
-        :tagging, :date
+        :tagging, :date, :duration
       )
     end
 end

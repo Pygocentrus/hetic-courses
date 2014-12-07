@@ -1,0 +1,57 @@
+/* line 4, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+img {
+  height: 100%; }
+
+/* line 7, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette {
+  float: left;
+  width: 100%;
+  border-radius: 15px;
+  height: 250px;
+  margin-top: 15px;
+  overflow: hidden; }
+
+/* line 16, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette:hover {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+/* line 20, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette:hover img {
+  transform: scale(0.95); }
+
+/* line 26, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette div:first-of-type {
+  overflow: hidden;
+  width: 40%;
+  background-color: #EEE;
+  float: left;
+  height: 250px; }
+
+/* line 35, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette div:nth-of-type(2) {
+  padding-left: 15px;
+  float: right;
+  width: 60%;
+  height: 250px; }
+
+/* line 51, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette h2, h3 {
+  display: inline-block; }
+
+/* line 54, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette h3 {
+  margin-left: 5px; }
+
+/* line 60, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+h3 {
+  color: #333 !important; }
+
+/* line 64, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.vignette:hover h2 {
+  color: #65bda1 !important; }
+
+/* line 67, /Users/thibautha/Projets/C05-HeticCourses/ruby-project/app/assets/stylesheets/courses.css.scss */
+.description {
+  height: 75px; }
+
+/*# sourceMappingURL=courses.css.css.map */

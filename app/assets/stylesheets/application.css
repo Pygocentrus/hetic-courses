@@ -17,7 +17,7 @@
 header{
   height:15%;
   width:100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  /*background-color: rgba(0, 0, 0, 0.3);*/
 }
 footer{
   height:15%;
@@ -25,13 +25,36 @@ footer{
   background-color: rgba(0, 0, 0, 0.3);
 
 }
-#nav{
-  float : right;
-  width:30%;
+body{
+  height:100%;
+  width:100%;
+/*  background-color:#222!important;*/
+
 }
-#content{
-  float:left;
-  width:60%;
+ul{
+text-decoration: none;
+}
+li{
+text-decoration: none;
+     list-style-type: none;
+}
+/*#main{
+  height:100%;
+}*/
+.left{
+  float : left;
+  width:30%;
+  height:1000px;
+  padding : 15px;
+  margin-top:30px;
+    border-right: 1px solid #666;
+
+}
+.right{
+  float:right;
+  width:70%;
+/*  background-color:#EEE;*/
+  padding-left:10px;
 }
 .clear{
   clear:both;

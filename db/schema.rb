@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205140748) do
+ActiveRecord::Schema.define(version: 20141207140333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141205140748) do
 
   create_table "courses", force: true do |t|
     t.string   "title",            null: false
-    t.string   "description",      null: false
+    t.text     "description",      null: false
     t.string   "level"
     t.string   "location"
     t.string   "video_link"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141205140748) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "date"
+    t.string   "duration"
   end
 
   create_table "like", force: true do |t|
@@ -83,7 +84,6 @@ ActiveRecord::Schema.define(version: 20141205140748) do
     t.text     "short_bio"
     t.string   "avatar"
     t.string   "personal_link"
-    t.integer  "role_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

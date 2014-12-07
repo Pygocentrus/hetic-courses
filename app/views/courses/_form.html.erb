@@ -36,13 +36,17 @@
   </div>
 
   <div class="field form-group">
+    <%= f.text_field :duration, placeholder: 'Durée' %> mn
+  </div>
+
+  <div class="field form-group">
     <%= f.label "Catégorie" %><br>
     <%= f.select(:categorie_id, Categorie.all.collect {|p| [ p.name, p.id ] }) %>
   </div>
 
   <div class="field form-group">
     <%= f.label "Tags" %><br>
-    <%= f.select(:tags, Tag.all.collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 5 }) %>
+    <%= f.select(:tags, Tag.all.collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 3 }) %>
   </div>
 
   <div class="field form-group">
@@ -55,6 +59,6 @@
   </div>
 
   <div class="actions">
-    <%= submit_tag "Ajouter", class: "btn btn-primary" %>
+    <%= submit_tag "Valider", class: "btn btn-primary" %>
   </div>
 <% end %>

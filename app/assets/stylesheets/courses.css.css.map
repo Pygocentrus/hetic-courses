@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "courses.css.css",
+  "sources": [
+    "courses.css.scss"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAIE,QAAO;;;AAET;EACE,OAAM;EACN,OAAM;EAEN,eAAc;EACd,QAAQ;EACR,YAAW;EACX,UAAS;;;AAEX,SAAS;EACP,kBAAkB;;;AAGpB,SAAS,OAAO;EACd,WAAW;;;AAKb,UAAU,GAAG;EACX,UAAS;EACT,OAAM;EACN,kBAAiB;EACjB,OAAO;EACP,QAAQ;;;AAIV,UAAU,GAAG;EACT,cAAc;EAChB,OAAM;EACN,OAAM;EACF,QAAQ;;;AAGd,UAAU,IAAI;EAUV,SAAS;;;AAEb,UAAU;EACN,aAAa;;;AAKjB;EAEI,OAAO;;;AAEX,SAAS,OAAO;EACZ,OAAO;;;AAEX;EACI,QAAO",
+  "sourceRoot": ""
+}

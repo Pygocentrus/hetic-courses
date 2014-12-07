@@ -1,41 +1,41 @@
-
-<h1><%= @course.title %></h1>
-
 <p>
-  <%= link_to 'Modifier', edit_course_path(@course) %> |
-  <%= link_to 'Précécent', courses_path %>
+  <%= link_to 'Edit', edit_course_path(@course) %> |
+  <%= link_to 'Next', courses_path %>
 </p>
-
+<% if @course.image_link.empty? %>
+    <img src="http://commons.studyrama.com/data/bc2e/14130/logo_298x175.png"></img>
+<% else %>
+    <img src="<%= @course.image_link %>"></img>
+<% end %>
+<h2><%= @course.title %></h2>
 <div>
-  <span>
-    Par
-    <% @course.users.each_with_index do |user, index| %>
-      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.id) %>
-      <% if index < (@course.users.length - 1)  %>, <% end %>
-    <% end %>
-  </span>
+    <p>
+        By:
+        <% @course.users.each_with_index do |user, index| %>
+            <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.id) %>
+            <% if index < (@course.users.length - 1)  %>, <% end %>
+        <% end %>
+    </p>
+    <p>
+        Date: <%= @course.date.strftime("%Y/%m/%d à %H:%M") %>
+    </p>
+    <p>
+        Duration: <%= @course.duration %> mn
+    </p>
+    <p>
+        Place: <%= @course.location %>
+    </p>
+    <p>
+        Category: <%= link_to @course.categorie.name, category_path(@course.categorie.id) %>
+    </p>
+    <p>
+        Tags:
+        <% @course.tags.each_with_index do |tag, index| %>
+            <%= link_to tag.name, tag_path(tag.id) %>
+            <!-- <% if index < (@course.tags.length - 1)  %>, <% end %>-->
+        <% end %>
+    </p>
+    <p>About:
+    <%= @course.description %>
+    </p>
 </div>
-
-<div>
-  Date: <%= @course.date.strftime("Le %d/%m/%Y à %H:%M") %>
-</div>
-
-<div>
-  Lieu: <%= @course.location %>
-</div>
-
-<div>
-  Catégorie: <%= link_to @course.categorie.name, category_path(@course.categorie.id) %>
-</div>
-
-<div>
-  Tags:
-  <% @course.tags.each_with_index do |tag, index| %>
-  <%= link_to tag.name, tag_path(tag.id) %>
-    <% if index < (@course.tags.length - 1)  %>, <% end %>
-  <% end %>
-</div>
-
-<p>
-  <%= @course.description %>
-</p>

@@ -1,31 +1,23 @@
-<h1>Cours à venir</h1>
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Auteur</th>
-      <th>Difficulté</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.title %></td>
-        <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
-        <td><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></td>
-        <td><%= course.level %></td>
-        <td><%= link_to 'Voir', course, :class => "btn btn-primary" %></td>
-        <td><%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %></td>
-        <td><%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'Nouveau cours', new_course_path, :class => "btn btn-primary" %>
+<% @courses.each do |course| %>
+    <div class="vignette">
+        <div>
+            <% if course.image_link.empty? %>
+                <img src="http://commons.studyrama.com/data/bc2e/14130/logo_298x175.png"></img>
+            <% else %>
+                <img src="<%= course.image_link %>"></img>
+            <% end %>
+        </div>
+        <div>
+            <h2><%= link_to course.title, course %></h2>
+            <h3><%= course.date.strftime("%d/%m/%Y, %H:%M") %></h3>
+            <p>Par:
+            <%= link_to "#{course.users[0].first_name} #{course.users[0].last_name}", user_path(course.users[0])%>
+            </p>
+            <p>Difficulté: <%= course.level %> / Emplacement: <%= course.location %></p>
+            <p class="description">Description: <%= course.description %></p>
+            <%= link_to 'Voir', course%>
+            <%= link_to 'Modifier', edit_course_path(course)%>
+            <%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }%>
+        </div>
+    </div>
+<% end %>

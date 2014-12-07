@@ -14,6 +14,6 @@ class Course < ActiveRecord::Base
 
   validates :title, :presence => true
   validates :description, :presence => true
-  validates_format_of :duration, with: /\A[5-9][0-9]{0,2}\z/i
+  validates_format_of :duration, with: /\A[0-9]{0,3}\z/i
 
 end

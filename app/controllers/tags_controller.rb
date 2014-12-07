@@ -1,38 +1,33 @@
 class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
+  before_filter :require_login, only: [:new, :create, :edit, :update, :destroy]
 
-  # GET /tags
-  # GET /tags.json
   def index
-    @tags = Tag.all
+    @tags = Tag.all.order("name ASC")
+    @tags_count = Tagging.group(:tag_id).count()
   end
 
-  # GET /tags/1
-  # GET /tags/1.json
   def show
+    @courses = Course.find_by_tag_id(params[:id])
   end
 
   def find_by_name
-    @tag = Tag.search(params[:name])
+    @courses = Course.find_by_tag_name(params[:name])
   end
 
-  # GET /tags/new
   def new
     @tag = Tag.new
   end
 
-  # GET /tags/1/edit
   def edit
   end
 
-  # POST /tags
-  # POST /tags.json
   def create
     @tag = Tag.new(tag_params)
 
     respond_to do |format|
       if @tag.save
-        format.html { redirect_to @tag, notice: 'Tag was successfully created.' }
+        format.html { redirect_to @tag, notice: 'Le tag a bien été ajouté.' }
         format.json { render :show, status: :created, location: @tag }
       else
         format.html { render :new }
@@ -41,12 +36,10 @@ class TagsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /tags/1
-  # PATCH/PUT /tags/1.json
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to @tag, notice: 'Le tag a bien été modifié.' }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
@@ -55,24 +48,20 @@ class TagsController < ApplicationController
     end
   end
 
-  # DELETE /tags/1
-  # DELETE /tags/1.json
   def destroy
     @tag.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.html { redirect_to tags_url, notice: 'Le tag a bien été supprimé.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_tag
       @tag = Tag.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:course).permit(:name)
+      params.require(:tag).permit(:name)
     end
 end

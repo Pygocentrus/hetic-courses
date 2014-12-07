@@ -1,4 +1,7 @@
 class Course < ActiveRecord::Base
+
+  include Course::SearchableConcern
+
   has_many :taggings
   has_many :tags, :through => :taggings
 
@@ -11,4 +14,5 @@ class Course < ActiveRecord::Base
 
   validates :title, :presence => true
   validates :description, :presence => true
+  
 end

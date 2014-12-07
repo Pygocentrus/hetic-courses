@@ -42,8 +42,12 @@
 
     <div class="container">
       <div>
-        <p id="notice" class="bg-success"><%= flash[:notice] %></p>
-        <p id="alert" class="bg-danger"><%= flash[:alert] %></p>
+        <% if flash[:notice].present? %>
+          <p id="notice" class="alert alert-success"><%= flash[:notice] %></p>
+        <% end %>
+        <% if flash[:alert].present? %>
+          <p id="alert" class="alert alert-danger"><%= flash[:alert] %></p>
+        <% end %>
       </div>
 
       <%= yield %>

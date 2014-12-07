@@ -11,7 +11,11 @@
     </div>
   <% end %>
 
+  <div class="field form-group">
+    <%= f.text_field :name, placeholder: 'Nom du tag' %>
+  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= submit_tag "Valider", class: "btn btn-primary" %>
   </div>
 <% end %>

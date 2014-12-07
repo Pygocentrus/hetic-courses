@@ -4,13 +4,9 @@ class CoursesController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
 
   def index
-    time_to_check = Time.now
     offset = params[:offset] || 0
     limit = 10
-    @courses = Course.where("date >= ?", time_to_check )
-                .offset(offset)
-                .limit(limit)
-                .order("date")
+    @courses = Course.last_ones(offset, limit)
   end
 
   def show

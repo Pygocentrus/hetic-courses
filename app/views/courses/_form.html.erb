@@ -41,12 +41,12 @@
 
   <div class="field form-group">
     <%= f.label "Catégorie" %><br>
-    <%= f.select(:categorie_id, Categorie.all.collect {|p| [ p.name, p.id ] }) %>
+    <%= f.select(:categorie_id, Categorie.all.order(:name).collect {|p| [ p.name, p.id ] }) %>
   </div>
 
   <div class="field form-group">
     <%= f.label "Tags" %><br>
-    <%= f.select(:tags, Tag.all.collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 3 }) %>
+    <%= f.select(:tags, Tag.all.order(:name).collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 3 }) %>
   </div>
 
   <div class="field form-group">

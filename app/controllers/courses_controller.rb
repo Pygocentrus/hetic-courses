@@ -3,6 +3,8 @@ class CoursesController < ApplicationController
   before_action :set_date, only: [:create]
   skip_before_filter :require_login, only: [:index, :show]
 
+  include Course::CascadingUpdatable
+
   def index
     offset = params[:offset] || 0
     limit = 10
@@ -28,19 +30,7 @@ class CoursesController < ApplicationController
       if @course.save
 
         # Saving the associated tags
-        params["course"]["tags"].each do |tag|
-          unless tag.empty?
-            # Search the tag
-            tag = Tag.where({name: tag}).first
-            # Create it if it wasn't found
-            unless tag.present?
-              tag = Tag.create({name: tag})
-            end
-            # Link the current tag to the course
-            @course.taggings.create(:tag => tag) if tag
-            tag = nil
-          end
-        end
+        self.update_or_add_tags
 
         # Saving the associated user
         @course.participations.create({
@@ -62,23 +52,11 @@ class CoursesController < ApplicationController
     respond_to do |format|
       if @course.update(course_params)
 
-        # Delete all the previous taggins
-        Tagging.where({course_id:@course.id}).delete_all
+        # Deleting all the previous taggings
+        self.clean_taggings
 
-        # Saving the associated tags
-        params["course"]["tags"].each do |tag|
-          unless tag.empty?
-            # Search the tag
-            tag = Tag.where({name: tag}).first
-            # Create it if it wasn't found
-            unless tag.present?
-              tag = Tag.create({name: tag})
-            end
-            # Link the current tag to the course
-            @course.taggings.create(:tag => tag) if tag
-            tag = nil
-          end
-        end
+        # Updating the associated tags
+        self.update_or_add_tags
 
         format.html { redirect_to @course, notice: 'Ce cours a bien été modifié.' }
         format.json { render :show, status: :ok, location: @course }

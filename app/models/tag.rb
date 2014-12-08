@@ -9,4 +9,8 @@ class Tag < ActiveRecord::Base
       find(:all)
     end
   end
+
+  def as_json(options={})
+    super(:only => [:id, :name])
+  end
 end

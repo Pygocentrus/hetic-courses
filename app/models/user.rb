@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true
 
   validates :email, uniqueness: true
+
+  def as_json(options={})
+    super(:only => [:id, :first_name, :last_name, :user_name, :email])
+  end
 end

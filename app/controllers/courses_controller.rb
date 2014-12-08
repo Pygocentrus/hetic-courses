@@ -61,6 +61,25 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+
+        # Delete all the previous taggins
+        Tagging.where({course_id:@course.id}).delete_all
+
+        # Saving the associated tags
+        params["course"]["tags"].each do |tag|
+          unless tag.empty?
+            # Search the tag
+            tag = Tag.where({name: tag}).first
+            # Create it if it wasn't found
+            unless tag.present?
+              tag = Tag.create({name: tag})
+            end
+            # Link the current tag to the course
+            @course.taggings.create(:tag => tag) if tag
+            tag = nil
+          end
+        end
+
         format.html { redirect_to @course, notice: 'Ce cours a bien été modifié.' }
         format.json { render :show, status: :ok, location: @course }
       else

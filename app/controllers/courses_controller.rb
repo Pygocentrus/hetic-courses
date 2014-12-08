@@ -68,6 +68,8 @@ class CoursesController < ApplicationController
   end
 
   def destroy
+    Participation.where({:course_id => @course.id}).delete_all
+    Tagging.where({:course_id => @course.id}).delete_all
     @course.destroy
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Ce cours a bien été supprimé.' }

@@ -21,8 +21,12 @@ module User::Identifiable
   end
 
   def is_superior_of?(user)
-    roles = ["Admin", "Modérateur", "Utilisateur"]
-    roles.index(current_user.role) < roles.index(user.role)
+    if !user.nil?
+      roles = ["Admin", "Modérateur", "Utilisateur"]
+      roles.index(current_user.role) < roles.index(user.role)
+    else
+      false
+    end
   end
 
 end

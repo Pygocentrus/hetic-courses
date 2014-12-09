@@ -1,6 +1,6 @@
 module UsersHelper
   def is_admin?
-    current_user.role == "Admin"
+    current_user.present? ? current_user.role == "Admin" : false
   end
 
   def is_own_account(user)
@@ -12,7 +12,7 @@ module UsersHelper
   end
 
   def is_superior_of?(user)
-    if user.id.present?
+    if !user.id.nil?
       roles = ["Admin", "Modérateur", "Utilisateur"]
       roles.index(current_user.role) < roles.index(user.role)
     else

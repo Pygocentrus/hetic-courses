@@ -9,7 +9,8 @@ class CoursesController < ApplicationController
     offset = params[:offset] || 0
     limit = 10
     @courses = Course.last_ones(offset, limit)
-    @courses = Course.search(params[:search])
+    # @tags_count = Tagging.group(:tag_id).count()
+    # @courses = Course.search(params[:search])
   end
 
   # def search

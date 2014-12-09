@@ -434,7 +434,8 @@ console.log('hello');
       // Create the type_zone input using custom class and contenteditable attribute
       self.$type_zone = $( document.createElement( "input" ) )
       .addClass( self.config[ "type-zone-class" ] )
-      .attr( "contenteditable", true );
+      .attr( "contenteditable", true )
+      .attr( "placeholder", "search" );
 
       // Adding tagging class and appending the type zone
       self.$elem
@@ -820,6 +821,8 @@ console.log('hello');
 
     return results;
   };
+
+
 
 })( window.jQuery, window, document );
 

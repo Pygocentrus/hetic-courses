@@ -11,6 +11,12 @@
     </div>
   <% end %>
 
+  <% if is_admin? || is_superior_of?(@user) %>
+  <div class="field form-group">
+    <%= f.label "Rôle" %><br>
+    <%= f.select(:role, max_roles_assignable) %>
+  </div>
+  <% end %>
   <div class="field form-group">
     <%= f.email_field :email, placeholder: "Email", class: "form-control" %>
   </div>
@@ -30,6 +36,9 @@
   </div>
   <div class="field form-group">
     <%= f.text_field :last_name, placeholder: "Nom", class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.text_field :city, placeholder: "Ville", class: "form-control" %>
   </div>
   <div class="field form-group">
     <%= f.label "Date de naissance" %><br>

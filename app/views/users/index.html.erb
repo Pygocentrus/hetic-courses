@@ -3,10 +3,10 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Email</th>
-      <th>Pseudo</th>
       <th>Prénom</th>
       <th>Nom</th>
+      <th>Email</th>
+      <th>Pseudo</th>
       <th>Date de naissance</th>
       <th>Promotion</th>
       <th>Description</th>
@@ -17,16 +17,20 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.email %></td>
-        <td><%= user.user_name %></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.user_name %></td>
         <td><%= user.birth_date.strftime("%d/%m/%Y") %></td>
         <td><%= user.batch %></td>
         <td><%= user.short_bio %></td>
-        <td><%= link_to 'Voir', user, :class => "btn btn-primary" %></td>
-        <td><%= link_to 'Modifier', edit_user_path(user), :class => "btn btn-warning" %></td>
-        <td><%= link_to 'Supprimer', user, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+        <% if is_own_account(user) || is_superior_of?(user) %>
+          <td><%= link_to 'Voir', user, :class => "btn btn-primary" %></td>
+          <td><%= link_to 'Modifier', edit_user_path(user), :class => "btn btn-warning" %></td>
+          <td><%= link_to 'Supprimer', user, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+        <% else %>
+          <td colspan="3"></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +38,6 @@
 
 <br>
 
-<%= link_to 'Créer un nouvel utilisateur', new_user_path, :class => "btn btn-primary" %>
+<% if is_connected? && is_moderator? %>
+  <%= link_to 'Créer un nouvel utilisateur', new_user_path, :class => "btn btn-primary" %>
+<% end %>

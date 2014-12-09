@@ -1,15 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :is_owner, only: [:edit, :update, :destroy]
   skip_before_filter :require_login, only: [:new, :create]
 
   include ActionView::Helpers::TextHelper
+  include User::Identifiable
 
   def index
-    @users = User.all
+    @users = User.all.order({:user_name => :asc})
     # Formatting the description
     @users = @users.map do |user|
       user.short_bio = truncate(user.short_bio, length: 15, separator: ' ')
-      return user
+      user
     end
   end
 
@@ -25,6 +27,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.role = "Utilisateur"
 
     respond_to do |format|
       if @user.save
@@ -58,11 +61,25 @@ class UsersController < ApplicationController
   end
 
   private
+
+    def is_owner
+      if !is_superior_of?(@user) && !is_own_account?(@user)
+        redirect_to login_path, alert: "Vous n'avez pas l'autorisation pour effectuer cette action."
+      end
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation, :crypted_password, :salt, :user_name, :first_name, :last_name, :birth_date, :batch, :avatar, :personal_link, :short_bio)
+      parameters = [
+        :email, :password, :password_confirmation,
+        :crypted_password, :salt, :user_name,
+        :first_name, :last_name, :birth_date,
+        :batch, :avatar, :personal_link,
+        :short_bio, :city, (:role if self.is_admin? || is_superior_of?(@user))
+      ]
+      params.require(:user).permit(*parameters)
     end
 end

@@ -20,6 +20,8 @@
     <link rel="icon" type="image/png" href="" />
     <!-- Stylesheets -->
     <%= stylesheet_link_tag    "bootstrap.min" %>
+    <%= stylesheet_link_tag    "application.css" %>
+
     <!-- CSRF -->
     <%= csrf_meta_tags %>
   </head>
@@ -33,7 +35,7 @@
         <div class="collapse navbar-collapse">
           <% if current_user %>
             <p class="navbar-text navbar-left">
-              <%= link_to "Cours", root_path, :class => "navbar-link" %>
+              <%= link_to "Cours", courses_path, :class => "navbar-link" %>
             </p>
             <p class="navbar-text navbar-left">
               <%= link_to "Utilisateurs", users_path, :class => "navbar-link" %>

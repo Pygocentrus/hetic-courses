@@ -9,7 +9,15 @@ class CoursesController < ApplicationController
     offset = params[:offset] || 0
     limit = 10
     @courses = Course.last_ones(offset, limit)
+    @courses = Course.search(params[:search])
   end
+
+  # def search
+  #   @courses = Course.search(params[:search])
+  #   respond_to do |format|
+  #     format.json { render :index, courses: @courses }
+  #   end
+  # end
 
   def show
   end

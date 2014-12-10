@@ -43,8 +43,12 @@
         <td><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></td>
         <td><%= course.level %></td>
         <td><%= link_to 'Voir', course, :class => "btn btn-primary" %></td>
-        <td><%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %></td>
-        <td><%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+        <% if belongs_to_current_user(course) || is_moderator? %>
+          <td><%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %></td>
+          <td><%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+        <% else %>
+          <td colspan="2"></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -52,4 +56,6 @@
 
 <br>
 
-<%= link_to 'Créer un nouveau cours', new_course_path, :class => "btn btn-primary" %>
+<% if is_connected? %>
+  <%= link_to 'Créer un nouveau cours', new_course_path, :class => "btn btn-primary" %>
+<% end %>

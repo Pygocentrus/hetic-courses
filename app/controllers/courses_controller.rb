@@ -1,9 +1,10 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :set_date, only: [:create]
+  before_action :is_owner, only: [:edit, :update, :destroy]
   skip_before_filter :require_login, only: [:index, :show]
 
-  include Course::CascadingUpdatable
+  include Course::Updatable
 
   def index
     offset = params[:offset] || 0
@@ -86,6 +87,13 @@ class CoursesController < ApplicationController
   end
 
   private
+
+    def is_owner
+      if !belongs_to_current_user(@course) && !has_right_to_edit
+        redirect_to login_path, alert: "Vous n'avez pas l'autorisation pour effectuer cette action."
+      end
+    end
+
     def set_course
       @course = Course.find(params[:id])
     end

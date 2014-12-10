@@ -18,8 +18,12 @@
         <% end %>
       </td>
       <td><%= link_to 'Voir', category, :class => "btn btn-primary" %></td>
-      <td><%= link_to 'Modifier', edit_category_path(category), :class => "btn btn-warning" %></td>
-      <td><%= link_to 'Supprimer', category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+      <% if is_connected? && is_moderator? %>
+        <td><%= link_to 'Modifier', edit_category_path(category), :class => "btn btn-warning" %></td>
+        <td><%= link_to 'Supprimer', category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+      <% else %>
+        <td colspan="2"></td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>
@@ -27,4 +31,6 @@
 
 <br>
 
-<%= link_to 'Ajouter une nouvelle catégorie', new_category_path, :class => "btn btn-primary" %>
+<% if is_connected? && is_moderator? %>
+  <%= link_to 'Ajouter une nouvelle catégorie', new_category_path, :class => "btn btn-primary" %>
+<% end %>

@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_filter :require_login, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @categories = Categorie.all.order("categories.name ASC")
+    @categories = Categorie.all.order(name: :asc)
     @categories_count = Course.categories_count
   end
 

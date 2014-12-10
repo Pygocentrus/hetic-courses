@@ -2,7 +2,9 @@
 <h1><%= @course.title %></h1>
 
 <p>
-  <%= link_to 'Modifier', edit_course_path(@course) %> |
+  <% if belongs_to_current_user(@course) || is_moderator? %>
+    <%= link_to 'Modifier', edit_course_path(@course) %> |
+  <% end %>
   <%= link_to 'Précécent', courses_path %>
 </p>
 

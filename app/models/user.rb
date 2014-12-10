@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   has_many :participations
   has_many :courses, :through => :participations
 
-  validates :password, length: { minimum: 3 }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 3 }, :on => :create
+  validates :password, confirmation: true, :on => :create
+  validates :password_confirmation, presence: true, :on => :create
 
   validates :email, uniqueness: true
 

@@ -5,13 +5,12 @@ class CoursesController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
 
   include Course::Updatable
+  include Global::Slugable
 
   def index
     offset = params[:offset] || 0
     limit = 10
     @courses = Course.last_ones(offset, limit)
-    # @tags_count = Tagging.group(:tag_id).count()
-    # @courses = Course.search(params[:search])
   end
 
   def show
@@ -26,6 +25,7 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
+    @course.slug = to_slug(params[:title])
 
     # TODO: Creating a participation as an author
 

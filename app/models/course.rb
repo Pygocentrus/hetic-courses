@@ -13,6 +13,7 @@ class Course < ActiveRecord::Base
   belongs_to :categorie
 
   validates :title, :presence => true
+  validates :title, uniqueness: true
   validates :description, :presence => true
   validates_format_of :duration, with: /\A[0-9]{0,3}\z/i
 

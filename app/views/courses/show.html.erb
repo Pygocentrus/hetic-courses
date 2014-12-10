@@ -12,7 +12,7 @@
   <span>
     Par
     <% @course.users.each_with_index do |user, index| %>
-      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.id) %>
+      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(to_slug(user.user_name)) %>
       <% if index < (@course.users.length - 1)  %>, <% end %>
     <% end %>
   </span>

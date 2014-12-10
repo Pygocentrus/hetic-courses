@@ -6,6 +6,11 @@ class UsersController < ApplicationController
   include ActionView::Helpers::TextHelper
   include User::Identifiable
   include User::GravatarImplementable
+  include Global::Slugable
+
+  def to_param
+    to_slug(user_name)
+  end
 
   def index
     @users = User.all.order({:user_name => :asc})
@@ -28,6 +33,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.slug = to_slug(params[:user][:user_name])
     @user.role = "Utilisateur"
 
     respond_to do |format|
@@ -70,7 +76,7 @@ class UsersController < ApplicationController
     end
 
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_slug(params[:id])
     end
 
     def user_params
@@ -79,7 +85,7 @@ class UsersController < ApplicationController
         :crypted_password, :salt, :user_name,
         :first_name, :last_name, :birth_date,
         :batch, :avatar, :personal_link,
-        :short_bio, :city, (:role if self.is_admin? || is_superior_of?(@user))
+        :short_bio, :city, :slug, (:role if self.is_admin? || is_superior_of?(@user))
       ]
       params.require(:user).permit(*parameters)
     end

@@ -39,8 +39,10 @@
               <%= link_to "Utilisateurs", users_path, :class => "navbar-link" %>
             </p>
             <p class="navbar-text navbar-right">
-              <!-- <%= link_to "Mon profil", edit_user_path(current_user.id), :class => "navbar-link" %>-->
-              <%= link_to "#{current_user.first_name} #{current_user.last_name}", edit_user_path(current_user.id), :class => "navbar-link" %>
+                <%= link_to image_tag(full_url_for({email:current_user.email, size:"25"}), class: "img-circle") + " #{current_user.first_name} #{current_user.last_name}",
+                      edit_user_path(current_user.id),
+                      :class => 'navbar-link'
+                %>
             </p>
             <p class="navbar-text navbar-right">
               <%= link_to "Déconnexion", :logout, method: :post, :class => "navbar-link" %>

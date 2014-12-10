@@ -5,14 +5,13 @@ class UsersController < ApplicationController
 
   include ActionView::Helpers::TextHelper
   include User::Identifiable
-  require 'digest/md5'
+  include User::GravatarImplementable
 
   def index
     @users = User.all.order({:user_name => :asc})
-    # Formatting the description
     @users = @users.map do |user|
       user.short_bio = truncate(user.short_bio, length: 15, separator: ' ')
-      user.avatar = "http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(user.email)}?d=retro"
+      user.avatar = full_url_for({ email: user.email, size: "70" })
       user
     end
   end

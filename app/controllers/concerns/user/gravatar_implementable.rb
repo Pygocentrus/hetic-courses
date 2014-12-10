@@ -1,4 +1,4 @@
-module LayoutHelper
+module User::GravatarImplementable
 
   require 'digest/md5'
 

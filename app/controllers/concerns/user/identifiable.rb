@@ -1,23 +1,19 @@
 module User::Identifiable
 
   def is?(role)
-    current_user.role == role
+    current_user.nil? ? false : current_user.role == role
   end
 
   def is_own_account?(user)
-    current_user.id == user.id
+    current_user.nil? ? false : current_user.id == user.id
   end
 
   def is_admin?
-    current_user.role == "Admin"
+    current_user.nil? ? false : current_user.role == "Admin"
   end
 
   def moderator?
-    if !current_user.nil?
-      current_user.role == "Modérateur"
-    else
-      false
-    end
+    current_user.nil? ? false : current_user.role == "Modérateur"
   end
 
   def is_superior_of?(user)

@@ -1,61 +1,44 @@
-<h1>Cours à venir</h1>
+<!-- <h1>Cours à venir</h1> -->
 
+<div class="example-wrapper">
+  <div class="tags well" style="display:inline;">
+    <!-- <label for="tag" class="control-label">Tag</label> -->
+    <div data-tags-input-name="taggone" id="tag" placeholder="search" style="width:70%; margin-bottom:20px;float:left;"></div>
+    <!-- <p class="help-block">Press Enter, Comma or Spacebar to create a new tag, Backspace or Delete to remove the last one.</p> -->
+    <div style="float:left; margin: 15px 20px;"><%= link_to "Tags", tags_path, :style =>"color:#000!important;font-size:18px;" %> <span class="badge">23</span></div>
+    <div style="float:left; margin: 15px 20px;"><%= link_to "Catégories", categories_path, :style =>"color:#000!important;font-size:18px;" %> <span class="badge">7</span></div>
+    <div class="clear" style="clear: both;"></div>
+  </div>
+</div>
  <div>
 
-     <!-- Tag mise en forme -->
-     <!-- <div class="example-wrapper">
-       <div class="tags well">
-         <label for="tag" class="control-label">Tag</label>
-         <div data-tags-input-name="taggone" id="tag"></div>
-         <p class="help-block">Press Enter, Comma or Spacebar to create a new tag, Backspace or Delete to remove the last one.</p>
-       </div>
-     </div> -->
+<div class="row">
+  <% @courses.each do |course| %>
+  <div class="col-sm-5 col-md-3">
+    <div class="thumbnail" style="height:300px;">
+      <div style="height:100px; width:100%;overflow:hidden;">
+      <img src="<%=
+        if course.image_link.empty?
+          "http://commons.studyrama.com/data/bc2e/14130/logo_298x175.png"
+             else
+       course.image_link
+     end
+        %>" alt="..." style="max-width:255px;">
+      </div>
+      <div class="caption">
+        <h3><%= course.title %></h3>
+        <p><%= course.date.strftime("%d/%m/%Y, %H:%M") %>
+          <%= course.level %>
+          <%= "#{course.users[0].first_name} #{course.users[0].last_name}" %>
+        </p>
+        <p><%= link_to 'Voir', course, :class => "btn btn-primary" %>
+          <%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %>
+          <%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+          </p>
+      </div>
+    </div>
+  </div>
+  <% end %>
 
-     <!-- <form method="get" action="/search" id="search">
-       <input name="q" type="text" size="40" placeholder="Search..." />
-     </form> -->
 
-     <!-- <div class="search">
-        <form id="form_id" action="<%= url_for :search %>" method="GET">
-          coucou
-          <input type="text" name="search" value="">
-        </form>
-     </div> -->
-
-
- </div>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Auteur</th>
-      <th>Difficulté</th>
-      <th colspan="3">Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @courses.each do |course| %>
-      <tr>
-        <td><%= course.title %></td>
-        <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
-        <td><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></td>
-        <td><%= course.level %></td>
-        <td><%= link_to 'Voir', course, :class => "btn btn-primary" %></td>
-        <% if belongs_to_current_user(course) || is_moderator? %>
-          <td><%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %></td>
-          <td><%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-        <% else %>
-          <td colspan="2"></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if is_connected? %>
-  <%= link_to 'Créer un nouveau cours', new_course_path, :class => "btn btn-primary" %>
-<% end %>
+</div>

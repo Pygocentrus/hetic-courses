@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @users = User.all.order({:user_name => :asc})
     @users = @users.map do |user|
       user.short_bio = truncate(user.short_bio, length: 15, separator: ' ')
-      user.avatar = full_url_for({ email: user.email, size: "70" })
+      user.avatar = user.avatar.present? ? user.avatar : full_url_for({ email: user.email, size: "70" })
       user
     end
   end

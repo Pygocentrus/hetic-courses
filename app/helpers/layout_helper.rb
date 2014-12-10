@@ -12,4 +12,8 @@ module LayoutHelper
     "http://www.gravatar.com/avatar/#{email_hash_for(options[:email])}" + size + default
   end
 
+  def is_user_avatar_empty?(user)
+    user.avatar.empty?
+  end
+
 end

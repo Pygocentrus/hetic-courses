@@ -14,13 +14,6 @@ class CoursesController < ApplicationController
     # @courses = Course.search(params[:search])
   end
 
-  # def search
-  #   @courses = Course.search(params[:search])
-  #   respond_to do |format|
-  #     format.json { render :index, courses: @courses }
-  #   end
-  # end
-
   def show
   end
 
@@ -63,7 +56,7 @@ class CoursesController < ApplicationController
       if @course.update(course_params)
 
         # Deleting all the previous taggings
-        self.clean_taggings
+        self.clean_taggings if params["course"]["tags"].length > 1
 
         # Updating the associated tags
         self.update_or_add_tags

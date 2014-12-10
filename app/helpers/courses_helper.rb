@@ -1,6 +1,6 @@
 module CoursesHelper
   def belongs_to_current_user(course)
-    if !current_user.nil?
+    unless current_user.nil?
       owners = course.users
       is_owner = false
       owners.each do |owner|
@@ -15,11 +15,7 @@ module CoursesHelper
   end
 
   def is_moderator?
-    if !current_user.nil?
-      current_user.role == "Modérateur" || current_user.role == "Admin"
-    else
-      false
-    end
+    current_user.nil? ? false : current_user.role == "Modérateur" || current_user.role == "Admin"
   end
 
   def is_connected?

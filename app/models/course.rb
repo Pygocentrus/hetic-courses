@@ -16,15 +16,6 @@ class Course < ActiveRecord::Base
   validates :description, :presence => true
   validates_format_of :duration, with: /\A[0-9]{0,3}\z/i
 
-  # def self.search(search)
-  #   if search
-  #     Course.all
-  #     # find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-  #   else
-  #     Course.all
-  #   end
-  # end
-
   def as_json(options={})
     super(:only => [:id, :title, :location, :duration, :date, :level, :description])
   end

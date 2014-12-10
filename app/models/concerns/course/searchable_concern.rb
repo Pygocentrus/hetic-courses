@@ -47,6 +47,10 @@ module Course::SearchableConcern extend ActiveSupport::Concern
       .order("date")
     end
 
+    def search_by_title(query)
+      Course.where("LOWER(courses.title) LIKE LOWER(?)", "%#{query}%")
+    end
+
     # Searches the courses according
     # to the courses' categories and tags
     def search_by_strings(options)

@@ -20,3 +20,5 @@
 
 deploy.yml
 .procfile
+
+/config/database.yml

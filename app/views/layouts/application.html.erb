@@ -55,7 +55,7 @@
                   <li><%= link_to "Cours", courses_path, :class => "navbar-link" %></li>
                   <li><%= link_to "Utilisateurs", users_path, :class => "navbar-link" %></li>
                   <li class="divider"></li>
-                  <li><%= link_to "Mon profil", edit_user_path(to_slug(current_user.user_name)), :class => "navbar-link" %></li>
+                  <li><%= link_to "Mon profil", edit_user_path(current_user.slug), :class => "navbar-link" %></li>
                   <li><%= link_to "Déconnexion", :logout, method: :post, :class => "navbar-link" %></li>
                   <li class="divider"></li>
                   <li><%= link_to 'Créer un nouveau cours', new_course_path, :class => "navbar-link" %></li>

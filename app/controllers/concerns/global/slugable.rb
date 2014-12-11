@@ -11,6 +11,13 @@ module Global::Slugable
     ret.gsub! /\s*@\s*/, " at "
     ret.gsub! /\s*&\s*/, " and "
 
+    #special characters
+    ret.gsub! /é|è|ê|ë/, "e"
+    ret.gsub! /à|ä|â/, "a"
+    ret.gsub! /î|ï/, "i"
+    ret.gsub! /ô|ö/, "o"
+    ret.gsub! /û/, "u"
+
     #replace all non alphanumeric, underscore or periods with underscore
     ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '-'
 

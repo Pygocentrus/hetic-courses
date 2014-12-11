@@ -1,3 +1,8 @@
-<h1>Modifier mon profil</h1>
+<h1>Modifier le profil</h1>
+
+<p>
+  <%= link_to 'Voir la page', user_path(@user.slug) %> |
+  <%= link_to 'Précédent', users_path %>
+</p>
 
 <%= render 'form' %>

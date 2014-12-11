@@ -2,7 +2,7 @@
 
 <p>
   <% if is_own_account(@user) || is_superior_of?(@user) %>
-    <%= link_to 'Modifier', edit_user_path(to_slug(@user.user_name)) %> |
+    <%= link_to 'Modifier', edit_user_path(@user.slug) %> |
   <% end %>
   <%= link_to 'Retour', users_path %>
 </p>

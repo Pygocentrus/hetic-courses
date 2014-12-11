@@ -16,21 +16,4 @@ module LayoutHelper
     user.avatar.empty?
   end
 
-  def to_slug(str)
-    ret = str.strip.downcase
-    ret.gsub! /['`]/,""
-    ret.gsub! /\s*@\s*/, " at "
-    ret.gsub! /\s*&\s*/, " and "
-    ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '-'
-    ret.gsub! /_+/,"_"
-    ret.gsub! /\-+/,"-"
-    ret.gsub! /\A[_\-\.]+|[_\-\.]+\z/,""
-    ret
-  end
-
-  def to_slug2(str)
-    str.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
-  end
-
-
 end

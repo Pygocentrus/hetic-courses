@@ -3,7 +3,7 @@
 
 <p>
   <% if belongs_to_current_user(@course) || is_moderator? %>
-    <%= link_to 'Modifier', edit_course_path(@course) %> |
+    <%= link_to 'Modifier', edit_course_path(@course.slug) %> |
   <% end %>
   <%= link_to 'Précécent', courses_path %>
 </p>
@@ -12,7 +12,7 @@
   <span>
     Par
     <% @course.users.each_with_index do |user, index| %>
-      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(to_slug(user.user_name)) %>
+      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.slug) %>
       <% if index < (@course.users.length - 1)  %>, <% end %>
     <% end %>
   </span>

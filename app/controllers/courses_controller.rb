@@ -7,6 +7,10 @@ class CoursesController < ApplicationController
   include Course::Updatable
   include Global::Slugable
 
+  def to_param
+    to_slug(title)
+  end
+
   def index
     offset = params[:offset] || 0
     limit = 10
@@ -18,14 +22,16 @@ class CoursesController < ApplicationController
 
   def new
     @course = Course.new
+    @parameters = [@course]
   end
 
   def edit
+    @parameters = [@course, url: course_path(@course.slug)]
   end
 
   def create
     @course = Course.new(course_params)
-    @course.slug = to_slug(params[:title])
+    @course.slug = to_slug(params[:course][:title])
 
     # TODO: Creating a participation as an author
 
@@ -42,9 +48,10 @@ class CoursesController < ApplicationController
           role: "author"
         })
 
-        format.html { redirect_to @course, notice: 'Ce cours a bien été ajouté.' }
+        format.html { redirect_to course_path(@course.slug), notice: 'Ce cours a bien été ajouté.' }
         format.json { render :show, status: :created, location: @course }
       else
+        @parameters = [@course]
         format.html { render :new }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -52,6 +59,8 @@ class CoursesController < ApplicationController
   end
 
   def update
+    old_slug = @course.slug
+    @course.slug = to_slug(params[:course][:title])
     respond_to do |format|
       if @course.update(course_params)
 
@@ -61,9 +70,11 @@ class CoursesController < ApplicationController
         # Updating the associated tags
         self.update_or_add_tags
 
-        format.html { redirect_to @course, notice: 'Ce cours a bien été modifié.' }
+        format.html { redirect_to course_path(@course.slug), notice: 'Ce cours a bien été modifié.' }
         format.json { render :show, status: :ok, location: @course }
       else
+        @course.slug = old_slug
+        @parameters = [@course, url: course_path(@course.slug)]
         format.html { render :edit }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -89,7 +100,7 @@ class CoursesController < ApplicationController
     end
 
     def set_course
-      @course = Course.find(params[:id])
+      @course = Course.find_by_slug(params[:id])
     end
 
     def set_date
@@ -108,7 +119,7 @@ class CoursesController < ApplicationController
         :location, :video_link, :slideshare_link,
         :image_link, :user_id, :categorie_id,
         :tag_id, :tagging_id, :tags, :participation_id,
-        :tagging, :date, :duration
+        :tagging, :date, :duration, :slug
       )
     end
 end

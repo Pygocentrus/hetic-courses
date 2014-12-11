@@ -26,10 +26,10 @@
         <td><%= user.birth_date.strftime("%d/%m/%Y") %></td>
         <td><%= user.batch %></td>
         <td><%= user.short_bio %></td>
-        <td><%= link_to 'Voir', user_path(to_slug(user.user_name)), :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Voir', user_path(user.slug), :class => "btn btn-primary" %></td>
         <% if is_own_account(user) || is_superior_of?(user) %>
-          <td><%= link_to 'Modifier', edit_user_path(to_slug(user.user_name)), :class => "btn btn-warning" %></td>
-          <td><%= link_to 'Supprimer', user_path(to_slug(user.user_name)), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
+          <td><%= link_to 'Modifier', edit_user_path(user.slug), :class => "btn btn-warning" %></td>
+          <td><%= link_to 'Supprimer', user_path(user.slug), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
         <% else %>
           <td colspan="2"></td>
         <% end %>

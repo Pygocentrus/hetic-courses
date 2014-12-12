@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
   skip_before_filter :require_login, only: [:index, :show]
 
   include Course::Updatable
+  include Course::Searchable
   include Global::Slugable
 
   def to_param
@@ -18,6 +19,7 @@ class CoursesController < ApplicationController
   end
 
   def show
+    @contributors = get_contributors
   end
 
   def new

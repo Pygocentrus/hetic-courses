@@ -1,24 +1,9 @@
 module CoursesHelper
   def belongs_to_current_user(course)
-    unless current_user.nil?
-      owners = course.users
-      is_owner = false
-      owners.each do |owner|
-        if owner.id == current_user.id
-          is_owner = true
-        end
-      end
-      return is_owner
-    else
-      false
-    end
+    Course.is_contributor({ course_id: course.id, user_id: current_user.id })
   end
 
-  def is_moderator?
-    current_user.nil? ? false : current_user.role == "Modérateur" || current_user.role == "Admin"
-  end
-
-  def is_connected?
-    current_user.present?
+  def not_participating(course)
+    Participation.search_with({user_id: current_user.id, course_id: course.id}).count == 0
   end
 end

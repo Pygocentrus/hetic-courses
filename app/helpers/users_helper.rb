@@ -1,8 +1,4 @@
 module UsersHelper
-  def is_admin?
-    current_user.present? ? current_user.role == "Admin" : false
-  end
-
   def is_own_account(user)
     current_user.id == user.id
   end

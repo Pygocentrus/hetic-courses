@@ -1,5 +1,5 @@
 class ParticipationController < ApplicationController
-  before_action :set_participation, only: [:show, :edit, :update, :destroy]
+  before_action :set_participation, only: [:show, :edit, :update]
 
   def index
     @participations = Participation.all
@@ -16,15 +16,34 @@ class ParticipationController < ApplicationController
   end
 
   def create
-    @participation = Participation.new(participation_params)
+    # Check whether the course exists
+    begin
+      target_course = Course.find(params[:course_id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :back, alert: "Cours non trouvé."
+      return
+    end
 
-    respond_to do |format|
-      if @participation.save
-        format.html { redirect_to @participation, notice: 'Participation was successfully created.' }
-        format.json { render :show, status: :created, location: @participation }
-      else
-        format.html { render :new }
-        format.json { render json: @participation.errors, status: :unprocessable_entity }
+    # Check whether the user is connected
+    if current_user.nil?
+      redirect_to :back, alert: "Veuillez vous connecter pour participer à ce cours."
+    elsif target_course.users.include?(current_user)
+      redirect_to :back, alert: "Vous ne pouvez participer à votre propre cours."
+    else
+      parameters = Hash.new
+      parameters[:course_id] = params[:course_id]
+      parameters[:user_id] = current_user.id
+      parameters[:role] = "participant"
+      parameters[:date] = DateTime.now
+
+      @participation = Participation.new(parameters)
+
+      respond_to do |format|
+        if @participation.save
+          format.html { redirect_to :back, notice: "Participation enregistrée!" }
+        else
+          format.html { redirect_to :back, alert: "Cours non trouvé." }
+        end
       end
     end
   end
@@ -32,7 +51,7 @@ class ParticipationController < ApplicationController
   def update
     respond_to do |format|
       if @participation.update(participation_params)
-        format.html { redirect_to @participation, notice: 'Participation was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Participation was successfully updated.' }
         format.json { render :show, status: :ok, location: @participation }
       else
         format.html { render :edit }
@@ -42,10 +61,24 @@ class ParticipationController < ApplicationController
   end
 
   def destroy
-    @participation.destroy
-    respond_to do |format|
-      format.html { redirect_to courses_url, notice: 'Participation was successfully destroyed.' }
-      format.json { head :no_content }
+    # Check whether the course exists
+    begin
+      # target_course = Course.find(params[:course_id])
+      target_course = Course.find_by_slug(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to :back, alert: "Cours non trouvé."
+      return
+    end
+
+    # Check whether the user is connected
+    if current_user.nil?
+      redirect_to :back, alert: "Veuillez vous connecter."
+    else
+      @participation = Participation.where({ course_id: target_course.id, user_id: current_user.id }).first
+      @participation.destroy
+      respond_to do |format|
+        format.html { redirect_to course_path(target_course.slug), notice: "Participation annulée." }
+      end
     end
   end
 

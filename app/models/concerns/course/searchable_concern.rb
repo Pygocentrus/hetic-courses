@@ -56,6 +56,13 @@ module Course::SearchableConcern extend ActiveSupport::Concern
       course.present? ? course : nil
     end
 
+    def is_contributor(options)
+      Participation.select("*")
+      .joins(:user)
+      .where("participations.course_id = ? AND participations.user_id = ? AND participations.role = 'author'", options[:course_id], options[:user_id])
+      .count > 0
+    end
+
     # Searches the courses according
     # to the courses' categories and tags
     def search_by_strings(options)

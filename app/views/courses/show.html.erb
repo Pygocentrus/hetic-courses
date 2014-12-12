@@ -1,5 +1,10 @@
-
-<h1><%= @course.title %></h1>
+<h1><%= @course.title %>
+<% if !belongs_to_current_user(@course) && not_participating(@course) %>
+  <%= link_to 'Participer', participation_index_path(:course_id => @course.id), method: :post, :class => "btn btn-primary" %>
+<% elsif !belongs_to_current_user(@course) %>
+  <%= link_to 'Ne plus participer', participation_path, method: :delete, :class => "btn btn-warning" %>
+<% end %>
+</h1>
 
 <p>
   <% if belongs_to_current_user(@course) || is_moderator? %>
@@ -10,7 +15,7 @@
 
 <div>
   <span>
-    Par
+    <strong>Par</strong>
     <% @contributors.each_with_index do |user, index| %>
       <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.slug) %>
       <% if index < (@contributors.length - 1)  %>, <% end %>
@@ -19,23 +24,23 @@
 </div>
 
 <div>
-  Date: <%= @course.date.strftime("Le %d/%m/%Y à %H:%M") %>
+  <strong>Date:</strong> <%= @course.date.strftime("Le %d/%m/%Y à %H:%M") %>
 </div>
 
 <div>
-  Durée: <%= @course.duration %> mn
+  <strong>Durée:</strong> <%= @course.duration %> mn
 </div>
 
 <div>
-  Lieu: <%= @course.location %>
+  <strong>Lieu:</strong> <%= @course.location %>
 </div>
 
 <div>
-  Catégorie: <%= link_to @course.categorie.name, category_path(@course.categorie.id) %>
+  <strong>Catégorie:</strong> <%= link_to @course.categorie.name, category_path(@course.categorie.id) %>
 </div>
 
 <div>
-  Tags:
+  <strong>Tags:</strong>
   <% @course.tags.each_with_index do |tag, index| %>
   <%= link_to tag.name, tag_path(tag.id) %>
     <% if index < (@course.tags.length - 1)  %>, <% end %>
@@ -46,14 +51,24 @@
   <%= @course.description %>
 </p>
 
-<% if !belongs_to_current_user(@course) && not_participating(@course) %>
+<% if @participants.length > 0 %>
 <p>
-  <br>
-  <%= link_to 'Participer', participation_index_path(:course_id => @course.id), method: :post, :class => "btn btn-primary" %>
-</p>
-<% elsif !belongs_to_current_user(@course) %>
-<p>
-  <br>
-  <%= link_to 'Ne plus participer', participation_path, method: :delete, :class => "btn btn-warning" %>
+  <strong>Participants:</strong>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Participant</th>
+        <th>Pseudo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <% @participants.each do |participation| %>
+    <tr>
+      <td><%= "#{participation.user.first_name} #{participation.user.last_name}"%></td>
+      <td><%= participation.user.user_name %></td>
+      <td><%= link_to 'Voir', user_path(participation.user.slug), :class => "btn btn-primary" %></td>
+    </tr>
+    <% end %>
+  </table>
 </p>
 <% end %>

@@ -33,6 +33,14 @@ module Participation::SearchableConcern extend ActiveSupport::Concern
       .where("participations.role = ? AND participations.user_id = ?", options[:role], options[:user_id])
     end
 
+    def get_participants(options)
+      Participation.select('*')
+      .distinct
+      .joins(:user)
+      .where("participations.course_id = ? AND participations.role = 'participant'", options[:course_id])
+      .order("first_name ASC")
+    end
+
   end
 
 end

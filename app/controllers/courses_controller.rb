@@ -20,6 +20,7 @@ class CoursesController < ApplicationController
 
   def show
     @contributors = get_contributors
+    @participants = Participation.get_participants({ course_id: @course.id })
   end
 
   def new

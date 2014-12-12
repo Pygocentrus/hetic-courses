@@ -87,6 +87,14 @@ class CoursesController < ApplicationController
     end
   end
 
+  def addParticipation
+    @course.participations.create({
+      user: current_user,
+      date: params["course"]["date"],
+      role: "participant"
+    })
+  end
+
   private
 
     def is_owner

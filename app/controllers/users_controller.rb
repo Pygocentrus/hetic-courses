@@ -23,6 +23,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @courses_seen = Participation.get_participations({ role: 'participant', user_id: @user.id })
+    @courses_given = Participation.get_participations({ role: 'author', user_id: @user.id })
   end
 
   def new

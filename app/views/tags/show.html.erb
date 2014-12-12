@@ -13,7 +13,6 @@
     <tr>
       <th>Title</th>
       <th>Date</th>
-      <th>Auteur</th>
       <th>Difficulté</th>
       <th></th>
     </tr>
@@ -24,7 +23,6 @@
     <tr>
       <td><%= course.title %></td>
       <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
-      <td><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></td>
       <td><%= course.level %></td>
       <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
     </tr>

@@ -6,10 +6,9 @@ module Course::SearchableConcern extend ActiveSupport::Concern
   module ClassMethods
 
     def find_by_categorie_id(categorie_id)
-      Course.select("courses.title, courses.slug, courses.id, courses.date, courses.level, users.first_name, users.last_name")
+      Course.select("courses.title, courses.slug, courses.id, courses.date, courses.level")
+      .distinct
       .joins(:categorie)
-      .joins(:participations)
-      .joins(:users)
       .where("categories.id = ?", categorie_id)
     end
 
@@ -25,10 +24,9 @@ module Course::SearchableConcern extend ActiveSupport::Concern
     end
 
     def find_by_tag_id(tag_id)
-      Course.select("courses.title, courses.slug, courses.id, courses.date, courses.level, users.first_name, users.last_name")
+      Course.select("courses.title, courses.slug, courses.id, courses.date, courses.level")
+      .distinct
       .joins(:taggings)
-      .joins(:participations)
-      .joins(:users)
       .where("taggings.tag_id = " + tag_id.to_s)
     end
 

@@ -27,6 +27,12 @@ module Participation::SearchableConcern extend ActiveSupport::Concern
       users
     end
 
+    def get_participations(options)
+      Participation.select("*")
+      .joins(:course)
+      .where("participations.role = ? AND participations.user_id = ?", options[:role], options[:user_id])
+    end
+
   end
 
 end

@@ -41,3 +41,51 @@
   <strong>Biographie:</strong>
   <%= @user.short_bio %>
 </p>
+
+<% if @courses_given.length > 0 %>
+<p>
+  <strong>Cours donnés:</strong>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Niveau</th>
+        <th></th>
+      </tr>
+    </thead>
+    <% @courses_given.each do |course| %>
+    <tr>
+      <td><%= course.title %></td>
+      <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
+      <td><%= course.level %></td>
+      <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
+    </tr>
+    <% end %>
+  </table>
+</p>
+<% end %>
+
+<% if @courses_seen.length > 0 %>
+<p>
+  <strong>Cours vus:</strong>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Titre</th>
+        <th>Date</th>
+        <th>Niveau</th>
+        <th></th>
+      </tr>
+    </thead>
+    <% @courses_seen.each do |course| %>
+    <tr>
+      <td><%= course.title %></td>
+      <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
+      <td><%= course.level %></td>
+      <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
+    </tr>
+    <% end %>
+  </table>
+</p>
+<% end %>

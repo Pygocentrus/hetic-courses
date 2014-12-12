@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root :to => 'courses#index'
 
   resources :user_sessions
-  resources :users
-  resources :courses
+  resources :users, :path => "utilisateurs"
+  resources :courses, :path => "cours"
   resources :participation
   resources :categories
   resources :tags

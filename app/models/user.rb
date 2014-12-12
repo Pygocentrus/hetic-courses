@@ -9,6 +9,11 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, :on => :create
 
   validates :email, uniqueness: true
+  validates :user_name, uniqueness: true
+  validates :user_name, presence: true
+  validates :slug, uniqueness: true
+
+  include User::SearchableConcern
 
   def as_json(options={})
     super(:only => [:id, :first_name, :last_name, :user_name, :email])

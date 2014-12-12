@@ -6,7 +6,7 @@ module Course::SearchableConcern extend ActiveSupport::Concern
   module ClassMethods
 
     def find_by_categorie_id(categorie_id)
-      Course.select("courses.title, courses.id, courses.date, courses.level, users.first_name, users.last_name")
+      Course.select("courses.title, courses.slug, courses.id, courses.date, courses.level, users.first_name, users.last_name")
       .joins(:categorie)
       .joins(:participations)
       .joins(:users)
@@ -25,7 +25,7 @@ module Course::SearchableConcern extend ActiveSupport::Concern
     end
 
     def find_by_tag_id(tag_id)
-      Course.select("courses.title, courses.id, courses.date, courses.level, users.first_name, users.last_name")
+      Course.select("courses.title, courses.slug, courses.id, courses.date, courses.level, users.first_name, users.last_name")
       .joins(:taggings)
       .joins(:participations)
       .joins(:users)
@@ -33,7 +33,7 @@ module Course::SearchableConcern extend ActiveSupport::Concern
     end
 
     def find_by_tag_name(tag)
-      Course.select("courses.title, courses.date, courses.id")
+      Course.select("courses.title, courses.slug, courses.date, courses.id")
       .distinct
       .joins(:taggings)
       .joins(:tags)
@@ -47,13 +47,22 @@ module Course::SearchableConcern extend ActiveSupport::Concern
       .order("date")
     end
 
+    def search_by_title(query)
+      Course.where("LOWER(courses.title) LIKE LOWER(?)", "%#{query}%")
+    end
+
+    def find_by_slug(query)
+      course = Course.where("LOWER(courses.slug) LIKE LOWER(?)", query).first
+      course.present? ? course : nil
+    end
+
     # Searches the courses according
     # to the courses' categories and tags
     def search_by_strings(options)
       if options[:categorie].present?
         if options[:tag].present?
           # Search by Categorie AND Tag
-          return Course.select("courses.title, courses.date, courses.id")
+          return Course.select("courses.title, courses.slug, courses.date, courses.id")
           .distinct
           .joins(:taggings)
           .joins(:tags)
@@ -68,7 +77,7 @@ module Course::SearchableConcern extend ActiveSupport::Concern
       end
       if options[:tag].present?
         # Search by Tag
-        return Course.select("courses.title, courses.date, courses.id")
+        return Course.select("courses.title, courses.slug, courses.date, courses.id")
         .distinct
         .joins(:taggings)
         .joins(:tags)

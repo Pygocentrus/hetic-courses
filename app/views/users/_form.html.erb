@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(*@parameters) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -49,6 +49,9 @@
   </div>
   <div class="field form-group">
     <%= f.text_field :batch, placeholder: "Promotion HETIC", class: "form-control" %>
+  </div>
+  <div class="field form-group">
+    <%= f.text_field :avatar, placeholder: "Image de profil (utilisera Gravatar autrement)", class: "form-control" %>
   </div>
   <div class="field form-group">
     <%= f.text_area :short_bio, placeholder: "Biographie", class: "form-control" %>

@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
   validates :user_name, uniqueness: true
+  validates :user_name, presence: true
   validates :slug, uniqueness: true
 
   include User::SearchableConcern

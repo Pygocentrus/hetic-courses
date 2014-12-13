@@ -4,7 +4,6 @@
 *  http://www.webtoolkit.info/
 *
 **/
-console.log('webtoolkitLoad');
 
 function SHA1 (msg) {
 

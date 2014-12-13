@@ -14,6 +14,13 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery-tagging
+//= require webtoolkitsha1
+//= require slideshare
+
+var slideshare = new SlideshareManager($('#slideshare_url').val());
+slideshare.getSlideshareInfo(function (data) {
+  $('#iframe-slideshare').attr('src', "//www.slideshare.net/slideshow/embed_code/" + data.slideshow_id);
+});
 
 /***********AUTOCOMPLETE**********************/
 // $(function() {
@@ -45,33 +52,3 @@
 //     source: availableTags
 //   });
 // });
-
-var url = $('#slideshare_url').val(),
-    apiKey ="Bpul0eKA",
-    sharedsecret = "U20mvzXk",
-    timestr = getUnixTime(),
-    hashstr = generateTimeHash(timestr),
-    params = "api_key=" + apiKey + "&ts=" + timestr + "&hash=" + hashstr,
-    url = "http://fr.slideshare.net/api/oembed/2?url=" + url + "&format=json" + '&' + params;
-
-$.ajax({
-  url: url,
-  method: "GET",
-  dataType: 'jsonp',
-  success: function(data){
-    $('#iframe-slideshare').attr('src', "//www.slideshare.net/slideshow/embed_code/" + data.slideshow_id);
-  }
-});
-
-/******************************UNIXTIME*******************************/
-function getUnixTime() {
-  var theDate = new Date();
-  return Math.round(theDate.getTime()/1000.0);
-}
-
-/*******************************TIMEHASH*********************************/
-
-function generateTimeHash(timestr) {
-  var hashstr = SHA1(sharedsecret + timestr);
-  return hashstr;
-}

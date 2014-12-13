@@ -1,0 +1,4 @@
+<form action="<%= courses_path %>" method="get" >
+  <%= text_field_tag :search, nil, placeholder: 'Votre recherche', class: "form-control", style: "width: 70%; margin-bottom:20px;float:left;margin-right:30px;" %>
+  <%= submit_tag "Rechercher", class: "btn btn-primary", :name => nil %>
+</form>

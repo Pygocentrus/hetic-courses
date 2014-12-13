@@ -14,7 +14,8 @@ class CoursesController < ApplicationController
   end
 
   def index
-    @courses = Course.all
+    search = params[:search].present? ? params[:search] : nil
+    @courses = search.nil? ? Course.all : Course.search_by_title(search)
   end
 
   def next

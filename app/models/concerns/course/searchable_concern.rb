@@ -46,7 +46,7 @@ module Course::SearchableConcern extend ActiveSupport::Concern
     end
 
     def search_by_title(query)
-      Course.where("LOWER(courses.title) LIKE LOWER(?)", "%#{query}%")
+      Course.where("LOWER(courses.title) LIKE LOWER(?)", "%#{query}%%")
     end
 
     def find_by_slug(query)

@@ -5,6 +5,6 @@ module CoursesHelper
   end
 
   def not_participating(course)
-    Participation.search_with({user_id: current_user.id, course_id: course.id}).count == 0
+    return Participation.search_with({user_id: current_user.id, course_id: course.id}).count == 0 if current_user.present?
   end
 end

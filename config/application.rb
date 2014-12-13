@@ -21,6 +21,10 @@ module ConnexionTest
     # config.i18n.default_locale = :de
 
     config.assets.precompile += %w( bootstrap.min )
+    config.assets.css_compressor = :sass
+    config.assets.js_compressor = :uglifier
+    config.assets.precompile.shift
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'lib')
     Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
   end
 end

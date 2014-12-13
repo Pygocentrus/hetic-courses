@@ -1,6 +1,7 @@
 module CoursesHelper
   def belongs_to_current_user(course)
-    Course.is_contributor({ course_id: course.id, user_id: current_user.id })
+    return Course.is_contributor({ course_id: course.id, user_id: current_user.id }) if current_user.present?
+    false
   end
 
   def not_participating(course)

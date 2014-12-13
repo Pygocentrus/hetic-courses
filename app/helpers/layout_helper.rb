@@ -17,7 +17,7 @@ module LayoutHelper
   end
 
   def is_admin?
-    current_user.role == "Admin"
+    current_user.nil? ? false : current_user.role == "Admin"
   end
 
   def is_moderator?

@@ -46,15 +46,13 @@
 //   });
 // });
 
-
-/*********************HTTPREQUEST*************/
 var url = $('#slideshare_url').val(),
     apiKey ="Bpul0eKA",
     sharedsecret = "U20mvzXk",
     timestr = getUnixTime(),
     hashstr = generateTimeHash(timestr),
-    params = "api_key="+apiKey+"&ts="+timestr+"&hash="+hashstr+"",
-    url = "http://fr.slideshare.net/api/oembed/2?url=" + url + "&format=json" + '&' + params
+    params = "api_key=" + apiKey + "&ts=" + timestr + "&hash=" + hashstr,
+    url = "http://fr.slideshare.net/api/oembed/2?url=" + url + "&format=json" + '&' + params;
 
 $.ajax({
   url: url,
@@ -65,23 +63,15 @@ $.ajax({
   }
 });
 
-
 /******************************UNIXTIME*******************************/
-
-function getUnixTime()
-{
+function getUnixTime() {
   var theDate = new Date();
   return Math.round(theDate.getTime()/1000.0);
 }
 
 /*******************************TIMEHASH*********************************/
 
-function generateTimeHash(timestr)
-{
-    // form.ts.value = timestr;
-    var hashstr = SHA1(sharedsecret + timestr);
-    // alert('UNIX Time=[' + timestr + ']\nSecret Key=[' + ss + ']\nSHA1 Hash=[' + hashstr + ']');
-    // form.hash.value = hashstr;
-
-    return hashstr;
+function generateTimeHash(timestr) {
+  var hashstr = SHA1(sharedsecret + timestr);
+  return hashstr;
 }

@@ -2,9 +2,10 @@
 
 <div class="example-wrapper">
   <div class="tags well" style="display:inline;">
-    <!-- <label for="tag" class="control-label">Tag</label> -->
-    <div data-tags-input-name="taggone" id="tag" placeholder="search" style="width:70%; margin-bottom:20px;float:left;"></div>
-    <!-- <p class="help-block">Press Enter, Comma or Spacebar to create a new tag, Backspace or Delete to remove the last one.</p> -->
+    <div class="ui-widget">
+      <input id="tags" style="width:70%; margin-bottom:20px;float:left;">
+    </div>
+    <!-- <div data-tags-input-name="taggone" id="tag" style="width:70%; margin-bottom:20px;float:left;"></div> -->
     <div style="float:left; margin: 15px 20px;">
       <%= link_to "Tags", tags_path, :style =>"color:#000!important;font-size:18px;" %>
       <span class="badge"><%= Tag.count %></span>

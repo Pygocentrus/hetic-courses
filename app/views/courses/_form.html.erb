@@ -3,6 +3,7 @@
     <div id="error_explanation">
       <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
 
+
       <ul>
       <% @course.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -11,33 +12,50 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
-    <%= f.text_field :title, placeholder: 'Titre' %>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%; background-color:#F00!important;color:#FFF!important;">Titre</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :title, placeholder: 'ex: Mon super cours', class: "form-control" %>
+  </div>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%;">Niveau</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :level, placeholder: 'ex: Newbie', class: "form-control" %>
+  </div>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%;">Lieu</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :location, placeholder: 'ex: NYC', class: "form-control" %>
+  </div>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%;">Vidéo</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :video_link, placeholder: 'ex: http://youtube.com', class: "form-control" %>
+  </div>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%;">Slideshare</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :slideshare_link, placeholder: 'ex: http://slideshare.com', class: "form-control" %>
+  </div>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%;">Image</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :image_link, placeholder: 'ex: http://flikr.com', class: "form-control" %>
+  </div>
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%;">Durée</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_field :duration, placeholder: 'ex: 20', class: "form-control" %>
+    <span class="input-group-addon">mn</span>
   </div>
 
-  <div class="field form-group">
-    <%= f.text_field :level, placeholder: 'Niveau' %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.text_field :location, placeholder: 'Lieu' %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.url_field :video_link, placeholder: 'Lien vidéo' %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.url_field :slideshare_link, placeholder: 'Lien Slideshare' %>
-  </div>
-
-  <div class="field form-group">
+  <!-- <div class="field form-group">
     <%= f.url_field :image_link, placeholder: 'Lien image' %>
-  </div>
+  </div> -->
 
-  <div class="field form-group">
+  <!-- <div class="field form-group">
     <%= f.text_field :duration, placeholder: 'Durée' %> mn
-  </div>
+  </div> -->
 
   <div class="field form-group">
     <%= f.label "Catégorie" %><br>
@@ -49,9 +67,40 @@
     <%= f.select(:tags, Tag.all.order(:name).collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 3 }) %>
   </div>
 
-  <div class="field form-group">
-    <%= f.text_area :description, placeholder: 'Description' %>
+
+
+
+
+  <!-- <div class="row">
+
+
+    <div class="col-lg-2">
+
+      <% Categorie.all.order(:name).each do |cat| %>
+
+
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="checkbox" id="course_categorie" name="<%= cat.name %>">
+                </span>
+        <span class="form-control">
+         <%= cat.name %></span>
+      </div>
+      <% end %>
+    </div>
+
+
+  </div> -->
+
+
+  <div class="input-group" style="width:40%; margin:20px;">
+    <span class="input-group-addon" style="width:20%; background-color:#F00!important;color:#FFF!important;">Description</span>
+    <!-- <input type="text" class="form-control" placeholder="Username"> -->
+    <%= f.text_area :description, placeholder: 'ex: Lorem Elsass ipsum Strasbourg jetz gehts los gal ftomi! leverwurscht Pellentesque Coopé de Truchtersheim chambon nüdle risus, Christkindelsmärik tellus barapli', class: "form-control" %>
   </div>
+  <!-- <div class="field form-group">
+    <%= f.text_area :description, placeholder: 'Description' %>
+  </div> -->
 
   <div class="field form-group">
     <%= f.label :date %><br>
@@ -61,4 +110,26 @@
   <div class="actions">
     <%= submit_tag "Valider", class: "btn btn-primary" %>
   </div>
+
+  <!-- <div class="field form-group">
+    <%= f.text_field :title, placeholder: 'Titre' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.text_field :level, placeholder: 'Niveau' %>
+  </div> -->
+
+  <!-- <div class="field form-group">
+    <%= f.text_field :location, placeholder: 'Lieu' %>
+  </div> -->
+
+  <!-- <div class="field form-group">
+    <%= f.url_field :video_link, placeholder: 'Lien vidéo' %>
+  </div> -->
+
+  <!-- <div class="field form-group">
+    <%= f.url_field :slideshare_link, placeholder: 'Lien Slideshare' %>
+  </div> -->
+
+
 <% end %>

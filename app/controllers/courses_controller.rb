@@ -7,11 +7,13 @@ class CoursesController < ApplicationController
   include Course::Updatable
 
   def index
+    @courses = Course.all
+  end
+
+  def next
     offset = params[:offset] || 0
     limit = 10
     @courses = Course.last_ones(offset, limit)
-    # @tags_count = Tagging.group(:tag_id).count()
-    # @courses = Course.search(params[:search])
   end
 
   def show

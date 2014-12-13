@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: [:show, :edit, :update, :destroy]
   before_action :set_date, only: [:create]
   before_action :is_owner, only: [:edit, :update, :destroy]
-  skip_before_filter :require_login, only: [:index, :show]
+  skip_before_filter :require_login, only: [:index, :next, :show]
 
   include Course::Updatable
   include Course::Searchable

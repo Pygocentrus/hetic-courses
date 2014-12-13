@@ -49,12 +49,12 @@
 
 /*********************HTTPREQUEST*************/
 var url = $('#slideshare_url').val(),
-    apiKey ="Bpul0eKA",
-    sharedsecret = "U20mvzXk",
-    timestr = getUnixTime(),
-    hashstr = generateTimeHash(timestr),
-    params = "api_key="+apiKey+"&ts="+timestr+"&hash="+hashstr+"",
-    url = "http://fr.slideshare.net/api/oembed/2?url=" + url + "&format=json" + '&' + params
+apiKey ="Bpul0eKA",
+sharedsecret = "U20mvzXk",
+timestr = getUnixTime(),
+hashstr = generateTimeHash(timestr),
+params = "api_key="+apiKey+"&ts="+timestr+"&hash="+hashstr+"",
+url = "http://fr.slideshare.net/api/oembed/2?url=" + url + "&format=json" + '&' + params
 
 $.ajax({
   url: url,
@@ -78,10 +78,10 @@ function getUnixTime()
 
 function generateTimeHash(timestr)
 {
-    // form.ts.value = timestr;
-    var hashstr = SHA1(sharedsecret + timestr);
-    // alert('UNIX Time=[' + timestr + ']\nSecret Key=[' + ss + ']\nSHA1 Hash=[' + hashstr + ']');
-    // form.hash.value = hashstr;
+  // form.ts.value = timestr;
+  var hashstr = SHA1(sharedsecret + timestr);
+  // alert('UNIX Time=[' + timestr + ']\nSecret Key=[' + ss + ']\nSHA1 Hash=[' + hashstr + ']');
+  // form.hash.value = hashstr;
 
-    return hashstr;
+  return hashstr;
 }

@@ -17,10 +17,12 @@
 //= require webtoolkitsha1
 //= require slideshare
 
-var slideshare = new SlideshareManager($('#slideshare_url').val());
-slideshare.getSlideshareInfo(function (data) {
-  $('#iframe-slideshare').attr('src', "//www.slideshare.net/slideshow/embed_code/" + data.slideshow_id);
-});
+if (window.location.pathname.match(/^\/cours\//) !== null) {
+  var slideshare = new SlideshareManager($('#slideshare_url').val());
+  slideshare.getSlideshareInfo(function (data) {
+    $('#iframe-slideshare').attr('src', "//www.slideshare.net/slideshow/embed_code/" + data.slideshow_id);
+  });
+}
 
 /***********AUTOCOMPLETE**********************/
 // $(function() {

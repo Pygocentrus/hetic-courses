@@ -42,8 +42,6 @@ class CoursesController < ApplicationController
     @course.slug = to_slug(params[:course][:title])
     @course.video_link = format_video(params[:course][:video_link])
 
-    # TODO: Creating a participation as an author
-
     respond_to do |format|
       if @course.save
 
@@ -71,8 +69,6 @@ class CoursesController < ApplicationController
     old_slug = @course.slug
     @course.slug = to_slug(params[:course][:title])
     @course.video_link = format_video(params[:course][:video_link])
-    puts "Video LINK"
-    puts @course.video_link
 
     respond_to do |format|
       if @course.update(course_params)

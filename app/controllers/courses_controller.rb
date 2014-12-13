@@ -6,6 +6,7 @@ class CoursesController < ApplicationController
 
   include Course::Updatable
   include Course::Searchable
+  include Course::YoutubeEmbeddable
   include Global::Slugable
 
   def to_param
@@ -39,6 +40,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.slug = to_slug(params[:course][:title])
+    @course.video_link = format_video(params[:course][:video_link])
 
     # TODO: Creating a participation as an author
 
@@ -68,6 +70,10 @@ class CoursesController < ApplicationController
   def update
     old_slug = @course.slug
     @course.slug = to_slug(params[:course][:title])
+    @course.video_link = format_video(params[:course][:video_link])
+    puts "Video LINK"
+    puts @course.video_link
+
     respond_to do |format|
       if @course.update(course_params)
 

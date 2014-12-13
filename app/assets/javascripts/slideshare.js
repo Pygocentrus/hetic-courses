@@ -29,9 +29,9 @@ SlideshareManager.prototype.getSlideshareInfo = function (fn) {
 };
 
 SlideshareManager.prototype.init = function () {
-  timestr = this.getUnixTime(),
-  hashstr = this.generateTimeHash(timestr),
-  params = "&api_key=" + this.apiKey + "&ts=" + timestr + "&hash=" + hashstr + "&format=json",
+  var timestr = this.getUnixTime(),
+      hashstr = this.generateTimeHash(timestr),
+      params = "&api_key=" + this.apiKey + "&ts=" + timestr + "&hash=" + hashstr + "&format=json";
   this.url = "http://fr.slideshare.net/api/oembed/2?url=" + this.source + params;
 };
 

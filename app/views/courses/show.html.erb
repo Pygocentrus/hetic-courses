@@ -1,7 +1,7 @@
 <h1><%= @course.title %>
 <% if !belongs_to_current_user(@course) && not_participating(@course) %>
   <%= link_to 'Participer', participation_index_path(:course_id => @course.id), method: :post, :class => "btn btn-primary" %>
-<% elsif !belongs_to_current_user(@course) %>
+<% elsif !belongs_to_current_user(@course) && is_connected? %>
   <%= link_to 'Ne plus participer', participation_path, method: :delete, :class => "btn btn-warning" %>
 <% end %>
 </h1>

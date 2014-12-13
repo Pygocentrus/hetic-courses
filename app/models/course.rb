@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
   validates_format_of :duration, with: /\A[0-9]{0,3}\z/i
 
   def as_json(options={})
-    super(:only => [:id, :title, :location, :duration, :date, :level, :description])
+    super(:only => [:id, :title, :location, :duration, :date, :level, :description, :slideshare_link, :video_link])
   end
 
 end

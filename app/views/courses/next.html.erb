@@ -1,11 +1,10 @@
-<!-- <h1>Cours à venir</h1> -->
-
 <div class="example-wrapper">
   <div class="tags well" style="display:inline;">
-    <div class="ui-widget">
-      <input id="tags" style="width:70%; margin-bottom:20px;float:left;">
-    </div>
-    <!-- <div data-tags-input-name="taggone" id="tag" style="width:70%; margin-bottom:20px;float:left;"></div> -->
+
+    <input type="text" name="search" placeholder="Votre recherche" class="form-control" style="width: 70%; margin-bottom:20px;float:left;margin-right:30px;">
+    <button name="search" class="btn btn-primary">Rechercher</button>
+    <div class="clear" style="clear: both;"></div>
+
     <div style="float:left; margin: 15px 20px;">
       <%= link_to "Tags", tags_path, :style =>"color:#000!important;font-size:18px;" %>
       <span class="badge"><%= Tag.count %></span>
@@ -39,16 +38,15 @@
             <%= "#{course.users[0].first_name} #{course.users[0].last_name}" %>
           </p>
           <p>
-            <%= link_to 'Voir', course, :class => "btn btn-primary" %>
+            <%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %>
             <% if is_moderator? || belongs_to_current_user(course) %>
-            <%= link_to 'Modifier', edit_course_path(course), :class => "btn btn-warning" %>
-            <%= link_to 'Supprimer', course, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+            <%= link_to 'Modifier', edit_course_path(course.slug), :class => "btn btn-warning" %>
+            <%= link_to 'Supprimer', course_path(course.slug), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
             <% end %>
           </p>
         </div>
       </div>
     </div>
     <% end %>
-
-
   </div>
+  

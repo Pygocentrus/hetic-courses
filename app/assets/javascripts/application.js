@@ -15,11 +15,59 @@
 //= require bootstrap
 //= require jquery-tagging
 
-// jQuery on Ready example
-// (function( $, window, document, undefined ) {
-//   $( document ).ready(function() {
-//     var t = $( "#tag" ).tagging();
-//     t[0].addClass( "form-control" );
-//     console.log( t[0] );
-//   });
-// })( window.jQuery, window, document );
+/***********AUTOCOMPLETE**********************/
+$(function() {
+  var availableTags = [
+  "ActionScript",
+  "AppleScript",
+  "Asp",
+  "BASIC",
+  "C",
+  "C++",
+  "Clojure",
+  "COBOL",
+  "ColdFusion",
+  "Erlang",
+  "Fortran",
+  "Groovy",
+  "Haskell",
+  "Java",
+  "JavaScript",
+  "Lisp",
+  "Perl",
+  "PHP",
+  "Python",
+  "Ruby",
+  "Scala",
+  "Scheme"
+  ];
+  $( "#tags" ).autocomplete({
+    source: availableTags
+  });
+});
+
+
+/*********************HTTPREQUEST*************/
+
+var xmlhttp = new XMLHttpRequest();
+var href = window.location.href;
+// console.log(href);
+// var url = href+".json";
+var url = "http://fr.slideshare.net/api/oembed/2?url=http://fr.slideshare.net/haraldf/business-quotes-for-2011&format=json&apiKey=Bpul0eKA&apiSecret=U20mvzXk";
+// console.log(url);
+
+xmlhttp.onreadystatechange = function() {
+  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+    var myArr = JSON.parse(xmlhttp.responseText);
+    myFunction(myArr);
+  }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+  console.log(arr);
+  // var linkSlide=arr[0];
+  // console.log(linkSlide);
+
+}

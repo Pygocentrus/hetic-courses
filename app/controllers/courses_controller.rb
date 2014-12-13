@@ -13,6 +13,10 @@ class CoursesController < ApplicationController
   end
 
   def index
+    @courses = Course.all
+  end
+
+  def next
     offset = params[:offset] || 0
     limit = 10
     @courses = Course.last_ones(offset, limit)

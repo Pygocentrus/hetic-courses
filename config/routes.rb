@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root :to => 'courses#index'
+  root :to => 'courses#next'
 
   resources :user_sessions
   resources :users, :path => "utilisateurs"

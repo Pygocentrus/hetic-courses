@@ -16,58 +16,72 @@
 //= require jquery-tagging
 
 /***********AUTOCOMPLETE**********************/
-$(function() {
-  var availableTags = [
-  "ActionScript",
-  "AppleScript",
-  "Asp",
-  "BASIC",
-  "C",
-  "C++",
-  "Clojure",
-  "COBOL",
-  "ColdFusion",
-  "Erlang",
-  "Fortran",
-  "Groovy",
-  "Haskell",
-  "Java",
-  "JavaScript",
-  "Lisp",
-  "Perl",
-  "PHP",
-  "Python",
-  "Ruby",
-  "Scala",
-  "Scheme"
-  ];
-  $( "#tags" ).autocomplete({
-    source: availableTags
-  });
-});
+// $(function() {
+//   var availableTags = [
+//   "ActionScript",
+//   "AppleScript",
+//   "Asp",
+//   "BASIC",
+//   "C",
+//   "C++",
+//   "Clojure",
+//   "COBOL",
+//   "ColdFusion",
+//   "Erlang",
+//   "Fortran",
+//   "Groovy",
+//   "Haskell",
+//   "Java",
+//   "JavaScript",
+//   "Lisp",
+//   "Perl",
+//   "PHP",
+//   "Python",
+//   "Ruby",
+//   "Scala",
+//   "Scheme"
+//   ];
+//   $( "#tags" ).autocomplete({
+//     source: availableTags
+//   });
+// });
 
 
 /*********************HTTPREQUEST*************/
+var url = $('#slideshare_url').val(),
+    apiKey ="Bpul0eKA",
+    sharedsecret = "U20mvzXk",
+    timestr = getUnixTime(),
+    hashstr = generateTimeHash(timestr),
+    params = "api_key="+apiKey+"&ts="+timestr+"&hash="+hashstr+"",
+    url = "http://fr.slideshare.net/api/oembed/2?url=" + url + "&format=json" + '&' + params
 
-var xmlhttp = new XMLHttpRequest();
-var href = window.location.href;
-// console.log(href);
-// var url = href+".json";
-var url = "http://fr.slideshare.net/api/oembed/2?url=http://fr.slideshare.net/haraldf/business-quotes-for-2011&format=json&apiKey=Bpul0eKA&apiSecret=U20mvzXk";
-// console.log(url);
-
-xmlhttp.onreadystatechange = function() {
-  if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-    var myArr = JSON.parse(xmlhttp.responseText);
-    myFunction(myArr);
+$.ajax({
+  url: url,
+  method: "GET",
+  dataType: 'jsonp',
+  success: function(data){
+    $('#iframe-slideshare').attr('src', "//www.slideshare.net/slideshow/embed_code/" + data.slideshow_id);
   }
+});
+
+
+/******************************UNIXTIME*******************************/
+
+function getUnixTime()
+{
+  var theDate = new Date();
+  return Math.round(theDate.getTime()/1000.0);
 }
-xmlhttp.open("GET", url, true);
-xmlhttp.send();
 
-function myFunction(arr) {
-  console.log(arr);
-  // var linkSlide=arr[0];
-  // console.log(linkSlide);
+/*******************************TIMEHASH*********************************/
 
+function generateTimeHash(timestr)
+{
+    // form.ts.value = timestr;
+    var hashstr = SHA1(sharedsecret + timestr);
+    // alert('UNIX Time=[' + timestr + ']\nSecret Key=[' + ss + ']\nSHA1 Hash=[' + hashstr + ']');
+    // form.hash.value = hashstr;
+
+    return hashstr;
 }

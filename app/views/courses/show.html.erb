@@ -1,89 +1,113 @@
-<h1><%= @course.title %>
-<% if !belongs_to_current_user(@course) && not_participating(@course) %>
-  <%= link_to 'Participer', participation_index_path(:course_id => @course.id), method: :post, :class => "btn btn-primary" %>
-<% elsif !belongs_to_current_user(@course) && is_connected? %>
-  <%= link_to 'Ne plus participer', participation_path, method: :delete, :class => "btn btn-warning" %>
+<div style="background-color:black; width:100%; height:175px; overflow: hidden; position:relative;">
+
+  <h1 style="position: absolute; z-index: 2; margin-left: 35%; font-size: 50px; margin-top: 20px; color:#FFF"><%= @course.title %></h1>
+  <h2 style="position: absolute; z-index: 2; margin-left: 35%; font-size: 30px; margin-top: 70px; color:#FFF;"><%= @course.location %>
+    <span style="color:#FFF; font-size:18px;"><%= @course.date.strftime("Le %d/%m/%Y à %H:%M") %></span>
+  </h2>
+  <div style="position: absolute; z-index: 2; margin-left: 35%; font-size: 18px; margin-top: 105px; color:#9D9D9D;"><%= @course.level %>
+  </div>
+  <div style="position: absolute; z-index: 2; margin-left: 35%; font-size: 18px; margin-top: 130px; color:#9D9D9D;"><%= @course.duration %> mn
+  </div>
+  <div style="position: absolute; z-index: 2; margin-left: 85%; font-size: 18px; margin-top: 34px; color:#9D9D9D;"><% if !belongs_to_current_user(@course) && not_participating(@course) %>
+    <%= link_to 'Participer', participation_index_path(:course_id => @course.id), method: :post, :class => "btn btn-primary" %>
+    <% elsif !belongs_to_current_user(@course) && is_connected? %>
+    <%= link_to 'Ne plus participer', participation_path, method: :delete, :class => "btn btn-warning" %>
+    <% end %>
+  </div>
+
+
+
+<div style="width:40%; height:175px;margin-left:-10%; overflow:hidden; z-index:15; position:absolute;transform:skewX(170deg); border-right: 5px solid #62D1AD; background-color:#FFF;">
+  <% if @course.image_link.empty? %>
+  <!-- Default course image -->
+  <%= image_tag "http://www.planetecampus.com/wp-content/files_flutter/1330619387LOGOHETIC.png", style: "max-height:190px; z-index:10; position:absolute; background-color:#FFF;transform:skewX(-170deg);margin-left:4%;" %>
+  <% else %>
+  <%= image_tag @course.image_link, style: "max-height:190px; z-index:10; position:absolute; background-color:#FFF;transform:skewX(-170deg);margin-left:20%;" %>
+  <% end %>
+</div>
+
+  <div id="half" style="width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;"></div>
+  <div id="back" style="width:100%; height:200px; position:absolute; background-color:rgba(0,0,0,0.8);"></div>
+
+  <%= image_tag "http://www.hetic.net/sites/default/files/social-pic/hetic-grande-ecole-web.jpg" , style:"margin-top:-202px; margin-left:210px;" %>
+
+
+
+</div>
+
+<% @contributors.each_with_index do |user, index| %>
+
+<div id="cover" style="border-radius:50%;border: 4px solid <%= color_avatar(user) %>; width:120px; height:120px; overflow:hidden; z-index:20; position:absolute; margin-left:80%; margin-top:-48px;">
+
+  <% if user.avatar.empty? %>
+  <%= image_tag(full_url_for({email:user.email, size:"112"}),style: "height:112px;  z-index:10; position:absolute; background-color:#FFF;") %>
+  <% else %>
+  <%= image_tag(user.avatar, style: "height:112px;  z-index:10; position:absolute; background-color:#FFF;") %>
+  <% end %>
+</div>
+<span style="margin-left:70%;  font-size:18px;">  <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.slug) %></span>
+  <% if index < (@contributors.length - 1)  %>, <% end %>
+
+
+
 <% end %>
+
+
+<!-- </div> -->
+
+
+<h1>
+
 </h1>
 
-<% if @course.image_link.empty? %>
-  <!-- Default course image -->
-  <%= image_tag "http://commons.studyrama.com/data/bc2e/14130/logo_298x175.png", style: "max-width:255px;" %>
-<% else %>
-  <%= image_tag @course.image_link, style: "max-width:255px;" %>
-<% end %>
 
-<p>
+
+<p style="float:left; margin-top:-45px;">
   <% if belongs_to_current_user(@course) || is_moderator? %>
     <%= link_to 'Modifier', edit_course_path(@course.slug) %> |
   <% end %>
   <%= link_to 'Toutes les cours.', courses_path %>
 </p>
 
-<div>
-  <span>
-    <strong>Par</strong>
-    <% @contributors.each_with_index do |user, index| %>
-      <%= link_to "#{user.first_name} #{user.last_name} (#{user.batch})", user_path(user.slug) %>
-      <% if index < (@contributors.length - 1)  %>, <% end %>
-    <% end %>
-  </span>
-</div>
 
-<div>
-  <strong>Date:</strong> <%= @course.date.strftime("Le %d/%m/%Y à %H:%M") %>
-</div>
 
-<div>
-  <strong>Durée:</strong> <%= @course.duration %> mn
-</div>
-
-<div>
-  <strong>Lieu:</strong> <%= @course.location %>
-</div>
-
-<div>
+<div style="margin-top:40px;">
   <strong>Catégorie:</strong> <%= link_to @course.categorie.name, category_path(@course.categorie.id) %>
-</div>
-
-<div>
   <strong>Tags:</strong>
   <% @course.tags.each_with_index do |tag, index| %>
   <%= link_to tag.name, tag_path(tag.id) %>
-    <% if index < (@course.tags.length - 1)  %>, <% end %>
+  <% if index < (@course.tags.length - 1)  %>, <% end %>
   <% end %>
+  <p>
+    <%= @course.description %>
+  </p>
 </div>
-
-<p>
-  <%= @course.description %>
-</p>
 
 <% if @participants.length > 0 %>
 <p>
   <strong>Participants:</strong>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Participant</th>
-        <th>Pseudo</th>
-        <th></th>
-      </tr>
-    </thead>
+  <ul>
     <% @participants.each do |participation| %>
-    <tr>
-      <td><%= "#{participation.user.first_name} #{participation.user.last_name}"%></td>
-      <td><%= participation.user.user_name %></td>
-      <td><%= link_to 'Voir', user_path(participation.user.slug), :class => "btn btn-primary" %></td>
-    </tr>
+    <li style="display:inline-block; margin-left:15px;">
+      <a href="<%= user_path(participation.user.slug) %>">
+        <div id="cover" style="border-radius:50%;border: 3px solid <%= color_avatar(participation) %>; width:100px; height:100px; overflow:hidden; float:left;">
+          <% if participation.avatar.empty? %>
+          <%= image_tag(full_url_for({email:participation.email, size:"94"}),style: "height:94px; background-color:#FFF;", title: participation.user.user_name) %>
+          <% else %>
+          <%= image_tag(participation.avatar, style: "height:94px; background-color:#FFF;", title: participation.user.user_name) %>
+          <% end %>
+        </div>
+      </a>
+    </li>
     <% end %>
-  </table>
+  </ul>
 </p>
 <% end %>
 
-<div>
+<div style="margin: 30px auto;">
   <!-- Youtube iframe -->
-  <iframe width="560" height="315" src="<%= @course.video_link %>" frameborder="0" allowfullscreen></iframe>
+  <iframe width="560" height="355" src="<%= @course.video_link %>" frameborder="0" allowfullscreen></iframe>
   <!-- Slideshare iframe -->
   <iframe id="iframe-slideshare" src="" width="425" height="355" frameborder="0" scrolling="no"
-   allowfullscreen data-slideshare-url="<%= @course.slideshare_link %>"></iframe>
+  allowfullscreen data-slideshare-url="<%= @course.slideshare_link %>"></iframe>
 </div>

@@ -86,6 +86,7 @@ class ParticipationController < ApplicationController
 
     def set_participation
       @participation = Participation.find(params[:id])
+      render_404 if @participation.nil?
     end
 
     def participation_params

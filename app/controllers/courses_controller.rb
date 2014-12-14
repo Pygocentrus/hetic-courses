@@ -111,6 +111,7 @@ class CoursesController < ApplicationController
 
     def set_course
       @course = Course.find_by_slug(params[:id])
+      render_404 if @course.nil?
     end
 
     def set_date

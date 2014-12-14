@@ -59,6 +59,7 @@ class TagsController < ApplicationController
   private
     def set_tag
       @tag = Tag.find(params[:id])
+      render_404 if @tag.nil?
     end
 
     def tag_params

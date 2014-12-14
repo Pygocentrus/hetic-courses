@@ -55,6 +55,7 @@ class CategoriesController < ApplicationController
   private
     def set_category
       @category = Categorie.find(params[:id])
+      render_404 if @category.nil?
     end
 
     def category_params

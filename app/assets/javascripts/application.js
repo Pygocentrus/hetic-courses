@@ -18,7 +18,8 @@
 //= require slideshare
 
 if (window.location.pathname.match(/^\/cours\//) !== null) {
-  var slideshare = new SlideshareManager($('#slideshare_url').val());
+  var url = $('#iframe-slideshare').attr('data-slideshare-url'),
+      slideshare = new SlideshareManager(url);
   slideshare.getSlideshareInfo(function (data) {
     $('#iframe-slideshare').attr('src', "//www.slideshare.net/slideshow/embed_code/" + data.slideshow_id);
   });

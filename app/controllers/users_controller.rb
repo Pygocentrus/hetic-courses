@@ -94,6 +94,7 @@ class UsersController < ApplicationController
 
     def set_user
       @user = User.find_by_slug(params[:id])
+      render_404 if @user.nil?
     end
 
     def user_params

@@ -81,15 +81,9 @@
 <% end %>
 
 <div>
-  Slideshare: <%= @course.slideshare_link %>
-  <input type="hidden" id="slideshare_url" value="<%= @course.slideshare_link %>">
-  <iframe id="iframe-slideshare" src=""
-   width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"
-   style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;"
-   allowfullscreen></iframe>
-</div>
-
-<div>
+  <!-- Youtube iframe -->
   <iframe width="560" height="315" src="<%= @course.video_link %>" frameborder="0" allowfullscreen></iframe>
-  Vidéo: <%= @course.video_link %>
+  <!-- Slideshare iframe -->
+  <iframe id="iframe-slideshare" src="" width="425" height="355" frameborder="0" scrolling="no"
+   allowfullscreen data-slideshare-url="<%= @course.slideshare_link %>"></iframe>
 </div>

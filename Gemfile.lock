@@ -96,6 +96,9 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    seed_dump (3.2.0)
+      activerecord (~> 4)
+      activesupport (~> 4)
     sorcery (0.8.6)
       bcrypt (~> 3.1)
       oauth (~> 0.4, >= 0.4.4)
@@ -132,6 +135,7 @@ DEPENDENCIES
   rails (= 4.1.7)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  seed_dump
   sorcery
   spring
   turbolinks

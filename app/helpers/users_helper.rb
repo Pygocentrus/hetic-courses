@@ -25,4 +25,14 @@ module UsersHelper
       @user.role
     end
   end
+
+  def color_avatar(user)
+    if user.role == "Admin"
+      "#FF00FF"
+    elsif user.role == "Modérateur"
+      "#00FF00"
+    else
+      "#69FF00"
+    end
+  end
 end

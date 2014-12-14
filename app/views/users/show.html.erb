@@ -1,4 +1,28 @@
-<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+<div style="background-color:black; width:100%; height:200px; overflow: hidden; position:relative;">
+  <h1 style="position: absolute; z-index: 2; margin-left: 250px; font-size: 50px; margin-top: 20px; color:#FFF"><%= @user.user_name %></h1>
+<h2 style="position: absolute; z-index: 2; margin-left: 250px; font-size: 30px; margin-top: 70px; color:<%= color_avatar(@user) %>;">  <%= "#{@user.first_name} #{@user.last_name}" %>
+</h2>
+<div style="position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 105px; color:#FFF;"><%= @user.email %>
+</div>
+<div style="position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 130px; color:#FFF;"><%= @user.city %>
+</div>
+<div style="position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 155px; color:#FFF;">  <%= @user.birth_date.strftime("Le %d/%m/%Y") %>
+</div>
+  <div id="cover" style="border-radius:50%;border: 5px solid <%= color_avatar(@user) %>; width:200px; height:200px; overflow:hidden; z-index:15; position:absolute;">
+  <%= image_tag @user.avatar, alt: "User picture", style: "height:190px;  z-index:10; position:absolute;" %>
+</div>
+
+<div id="half" style="width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;"></div>
+<div id="back" style="width:100%; height:200px; position:absolute; background-color:rgba(0,0,0,0.8);"></div>
+
+  <%= image_tag "http://www.hetic.net/sites/default/files/social-pic/hetic-grande-ecole-web.jpg" , style:"margin-top:-202px; margin-left:210px;" %>
+
+</div>
+
+
+
+
+<div  style="margin-left:100px;">
 
 <p>
   <% if is_own_account(@user) || is_superior_of?(@user) %>
@@ -7,14 +31,12 @@
   <%= link_to 'Retour', users_path %>
 </p>
 
-<p>
+<!-- <p>
   <strong>Email:</strong>
-  <%= @user.email %>
 </p>
 
 <p>
   <strong>Pseudo:</strong>
-  <%= @user.user_name %>
 </p>
 
 <p>
@@ -29,19 +51,17 @@
 
 <p>
   <strong>Ville:</strong>
-  <%= @user.city %>
 </p>
 
 <p>
   <strong>Date de naissance:</strong>
-  <%= @user.birth_date.strftime("Le %d/%m/%Y") %>
-</p>
+</p> -->
 
 <p>
   <strong>Biographie:</strong>
   <%= @user.short_bio %>
 </p>
-
+<br><br><br>
 <% if @courses_given.length > 0 %>
 <p>
   <strong>Cours donnés:</strong>
@@ -89,3 +109,4 @@
   </table>
 </p>
 <% end %>
+</div>

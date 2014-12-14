@@ -13,9 +13,9 @@
  *= require_tree .
  *= require_self
  */
- 
+
  /* Tagging Basic Style */
- .tagging {
+ /*.tagging {
    border: 1px solid #CCCCCC;
    cursor: text;
    font-size: 1em;
@@ -70,4 +70,12 @@
 
  .type-zone:focus {
    outline: none;
- }
+ }*/
+
+/*****************************USER SINGLE**************************************/
+body{
+  /*background-color: #000;*/
+}
+img::before {
+  background-color: #000;
+}

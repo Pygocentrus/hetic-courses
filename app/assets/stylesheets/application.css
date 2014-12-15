@@ -182,10 +182,10 @@ width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;
   height:112px;  z-index:10; position:absolute; background-color:#FFF;
 }
 #cover + span {
-  margin-left:70%;  font-size:18px;
+  margin-left:50%;  font-size:18px;
 }
 #navigation {
-  float:left; margin-top:-20px;
+  float:left; margin-top:0px;
 }
 .classification {
   margin-top:40px;

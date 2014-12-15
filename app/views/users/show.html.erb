@@ -1,120 +1,78 @@
 <div id="bandeauUser">
-  <h1 style="position: absolute; z-index: 2; margin-left: 250px; font-size: 50px; margin-top: 20px; color:#FFF"><%= @user.user_name %></h1>
-<h2 style="position: absolute; z-index: 2; margin-left: 250px; font-size: 30px; margin-top: 70px; color:<%= color_avatar(@user) %>;">  <%= "#{@user.first_name} #{@user.last_name}" %>
-  <span style="color:#FFF; font-size:18px;"><%= @user.batch %></span>
-</h2>
-<div style="position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 105px; color:#9D9D9D;"><%= @user.email %>
-</div>
-<div style="position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 130px; color:#9D9D9D;"><%= @user.city %>
-</div>
-<div style="position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 155px; color:#9D9D9D;">  <%= @user.birth_date.strftime("Le %d/%m/%Y") %>
-</div>
-  <div id="bigCover" style="border-radius:50%;border: 5px solid <%= color_avatar(@user) %>; width:200px; height:200px; overflow:hidden; z-index:15; position:absolute;">
-
+  <h1><%= @user.user_name %></h1>
+  <h2 style="color:<%= color_avatar(@user) %>;"><%= "#{@user.first_name} #{@user.last_name}" %>
+    <span><%= @user.batch %></span>
+  </h2>
+  <div style=""><%= @user.email %></div>
+  <div style=""><%= @user.city %></div>
+  <div style="">  <%= @user.birth_date.strftime("Le %d/%m/%Y") %></div>
+  <div id="bigCover" style="border: 5px solid <%= color_avatar(@user) %>;">
     <% if @user.avatar.empty? %>
-    <%= image_tag(full_url_for({email:@user.email, size:"190"}),style: "height:190px;  z-index:10; position:absolute; background-color:#FFF;") %>
+      <%= image_tag(full_url_for({email:@user.email, size:"190"})) %>
     <% else %>
-    <%= image_tag(@user.avatar, style: "height:190px;  z-index:10; position:absolute; background-color:#FFF;") %>
+      <%= image_tag(@user.avatar) %>
     <% end %>
-
-
-</div>
-
-<div id="half" style="width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;"></div>
-<div id="back" style="width:100%; height:200px; position:absolute; background-color:rgba(0,0,0,0.8);"></div>
-
+  </div>
+  <div id="half"></div>
+  <div id="back"></div>
   <%= image_tag "http://www.hetic.net/sites/default/files/social-pic/hetic-grande-ecole-web.jpg" , style:"margin-top:-202px; margin-left:210px;" %>
-
 </div>
-
-
-
-
-<div  style="margin-left:100px;">
-
-<p>
-  <% if is_own_account(@user) || is_superior_of?(@user) %>
-    <%= link_to 'Modifier', edit_user_path(@user.slug) %> |
+<div class="infoUser">
+  <p>
+    <% if is_own_account(@user) || is_superior_of?(@user) %>
+      <%= link_to 'Modifier', edit_user_path(@user.slug) %> |
+    <% end %>
+    <%= link_to 'Retour', users_path %>
+  </p>
+  <p>
+    <strong>Biographie:</strong>
+    <%= @user.short_bio %>
+  </p>
+  <br><br><br>
+  <% if @courses_given.length > 0 %>
+    <p>
+      <strong>Cours donnés:</strong>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Niveau</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @courses_given.each do |course| %>
+        <tr>
+          <td><%= course.title %></td>
+          <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
+          <td><%= course.level %></td>
+          <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
+        </tr>
+        <% end %>
+      </table>
+    </p>
   <% end %>
-  <%= link_to 'Retour', users_path %>
-</p>
-
-<!-- <p>
-  <strong>Email:</strong>
-</p>
-
-<p>
-  <strong>Pseudo:</strong>
-</p>
-
-<p>
-  <strong>Prénom:</strong>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <strong>Nom:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Ville:</strong>
-</p>
-
-<p>
-  <strong>Date de naissance:</strong>
-</p> -->
-
-<p>
-  <strong>Biographie:</strong>
-  <%= @user.short_bio %>
-</p>
-<br><br><br>
-<% if @courses_given.length > 0 %>
-<p>
-  <strong>Cours donnés:</strong>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Date</th>
-        <th>Niveau</th>
-        <th></th>
-      </tr>
-    </thead>
-    <% @courses_given.each do |course| %>
-    <tr>
-      <td><%= course.title %></td>
-      <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
-      <td><%= course.level %></td>
-      <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
-    </tr>
-    <% end %>
-  </table>
-</p>
-<% end %>
-
-<% if @courses_seen.length > 0 %>
-<p>
-  <strong>Cours vus:</strong>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Titre</th>
-        <th>Date</th>
-        <th>Niveau</th>
-        <th></th>
-      </tr>
-    </thead>
-    <% @courses_seen.each do |course| %>
-    <tr>
-      <td><%= course.title %></td>
-      <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
-      <td><%= course.level %></td>
-      <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
-    </tr>
-    <% end %>
-  </table>
-</p>
-<% end %>
+  <% if @courses_seen.length > 0 %>
+    <p>
+      <strong>Cours vus:</strong>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Niveau</th>
+            <th></th>
+          </tr>
+        </thead>
+        <% @courses_seen.each do |course| %>
+        <tr>
+          <td><%= course.title %></td>
+          <td><%= course.date.strftime("%d/%m/%Y, %H:%M") %></td>
+          <td><%= course.level %></td>
+          <td><%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %></td>
+        </tr>
+        <% end %>
+      </table>
+    </p>
+  <% end %>
 </div>

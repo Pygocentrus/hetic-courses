@@ -185,7 +185,7 @@ width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;
   margin-left:70%;  font-size:18px;
 }
 #navigation {
-  float:left; margin-top:-45px;
+  float:left; margin-top:-20px;
 }
 .classification {
   margin-top:40px;

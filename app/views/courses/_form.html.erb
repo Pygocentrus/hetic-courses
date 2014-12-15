@@ -46,8 +46,8 @@
     <%= f.label "Tags" %><br>
     <%= f.select(:tags, Tag.all.order(:name).collect {|t| [ t.name, t.name ] }, {}, { :multiple => true, :size => 3 }) %>
   </div>
-  <div class="input-group needField">
-    <span class="input-group-addon ">Description</span>
+  <div class="input-group">
+    <span class="input-group-addon needField">Description</span>
     <%= f.text_area :description, placeholder: 'ex: Lorem Elsass ipsum Strasbourg jetz gehts los gal ftomi! leverwurscht Pellentesque Coopé de Truchtersheim chambon nüdle risus, Christkindelsmärik tellus barapli', class: "form-control" %>
   </div>
   <div class="field form-group">

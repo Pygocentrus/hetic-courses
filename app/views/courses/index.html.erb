@@ -1,50 +1,48 @@
 <div class="example-wrapper">
-  <div class="tags well" style="display:inline;">
-
+  <div class="tags well">
     <%= render 'search' %>
-
-    <div class="clear" style="clear: both;"></div>
-    <div style="float:left; margin: 15px 20px;">
-      <%= link_to "Tags", tags_path, :style =>"color:#000!important;font-size:18px;" %>
+    <div class="clear"></div>
+    <div class="classificationSearch">
+      <%= link_to "Tags", tags_path %>
       <span class="badge"><%= Tag.count %></span>
-    </div>
-    <div style="float:left; margin: 15px 20px;">
-      <%= link_to "Catégories", categories_path, :style =>"color:#000!important;font-size:18px;" %>
+      <%= link_to "Catégories", categories_path %>
       <span class="badge"><%= Categorie.count %></span>
     </div>
-    <div class="clear" style="clear: both;"></div>
+    <div class="clear"></div>
   </div>
 </div>
 <div>
-
-<div class="row">
-  <% @courses.each do |course| %>
-  <div class="col-sm-5 col-md-3">
-    <div class="thumbnail" style="height:300px;">
-      <div style="height:100px; width:100%;overflow:hidden;">
-        <% if course.image_link.empty? %>
+  <div class="row">
+    <% @courses.each do |course| %>
+    <div class="col-sm-5 col-md-3">
+      <div class="thumbnail">
+        <div class="item">
+          <% if course.image_link.empty? %>
           <!-- Default course image -->
-          <%= image_tag "http://commons.studyrama.com/data/bc2e/14130/logo_298x175.png", style: "max-width:255px;" %>
-        <% else %>
-          <%= image_tag course.image_link, style: "max-width:255px;" %>
-        <% end %>
-      </div>
-      <div class="caption">
-        <h3><%= course.title %></h3>
-        <p>
-          <%= course.date.strftime("%d/%m/%Y, %H:%M") %>
-          <%= course.level %>
-          <%= "#{course.users[0].first_name} #{course.users[0].last_name}" %>
-        </p>
-        <p>
-          <%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %>
-          <% if is_moderator? || belongs_to_current_user(course) %>
-            <%= link_to 'Modifier', edit_course_path(course.slug), :class => "btn btn-warning" %>
-            <%= link_to 'Supprimer', course_path(course.slug), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+          <%= image_tag "http://commons.studyrama.com/data/bc2e/14130/logo_298x175.png" %>
+          <% else %>
+          <%= image_tag course.image_link %>
           <% end %>
-        </p>
+        </div>
+        <div class="caption">
+          <h3><%= course.title %></h3>
+          <div class="infoCourse">
+            <p><%= course.date.strftime("%d/%m/%Y, %H:%M") %></p>
+            <%= course.level %><br>
+            <p style="color:<%= color_avatar(course.users[0]) %>;"><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></p>
+          </div>
+          <div class="interactionCourse">
+            <p>
+              <%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %>
+              <% if is_moderator? || belongs_to_current_user(course) %>
+              <%= link_to 'Modifier', edit_course_path(course.slug), :class => "btn btn-warning" %>
+              <%= link_to 'Supprimer', course_path(course.slug), method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+              <% end %>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
+  

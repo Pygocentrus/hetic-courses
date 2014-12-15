@@ -14,62 +14,194 @@
  *= require_self
  */
 
- /* Tagging Basic Style */
- /*.tagging {
-   border: 1px solid #CCCCCC;
-   cursor: text;
-   font-size: 1em;
-   height: auto;
-   padding: 10px 10px 15px;
- }
+/*****************************HOME*********************************************/
 
- .tag {
-   background: none repeat scroll 0 0 #EE7407;
-   border-radius: 2px;
-   color: white;
-   cursor: default;
-   display: inline-block;
-   position: relative;
-   white-space: nowrap;
-   padding: 4px 20px 4px 0;
-   margin: 5px 10px 0 0;
- }
+.img-circle {
+  height:27px;
+  width:27px;
+  overflow:hidden;
+  float:left;
+}
+.dropdown-toggle p:first-of-type{
+  float:left;margin-left:10px;
+}
 
- .tag span {
-   background: none repeat scroll 0 0 #D66806;
-   border-radius: 2px 0 0 2px;
-   margin-right: 5px;
-   padding: 5px 10px 5px;
- }
+/*****************************USER INDEX***************************************/
 
- .tag .tag-i {
-   color: white;
-   cursor: pointer;
-   font-size: 1.3em;
-   height: 0;
-   line-height: 0.1em;
-   position: absolute;
-   right: 5px;
-   top: 0.7em;
-   text-align: center;
-   width: 10px;
- }
-
- .tag .tag-i:hover {
-   color: black;
-   text-decoration: underline;
- }
-
- .type-zone {
-   border: 0 none;
-   height: auto;
-   width: auto;
-   min-width: 20px;
-   display: inline-block;
- }
-
- .type-zone:focus {
-   outline: none;
- }*/
+.indexAvatarCover{
+  border-radius:50%;width:66px;height:66px; overflow:hidden;
+}.indexAvatarCover img{
+  max-height: 66px;
+}
 
 /*****************************USER SINGLE**************************************/
+
+#bandeauUser{
+  background-color:black; width:100%; height:200px; overflow: hidden; position:relative;
+}
+#bandeauUser h1 {
+  position: absolute; z-index: 2; margin-left: 250px; font-size: 50px; margin-top: 20px; color:#FFF;
+}
+#bandeauUser h2 {
+  position: absolute; z-index: 2; margin-left: 250px; font-size: 30px; margin-top: 70px;
+}
+#bandeauUser h2 span{
+  color:#FFF; font-size:18px;
+}
+#bandeauUser div:first-of-type{
+  position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 105px; color:#9D9D9D;
+}
+#bandeauUser div:nth-of-type(2){
+  position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 130px; color:#9D9D9D;
+}
+#bandeauUser div:nth-of-type(3){
+  position: absolute; z-index: 2; margin-left: 250px; font-size: 18px; margin-top: 155px; color:#9D9D9D;
+}
+
+#bandeauUser div:nth-of-type(5){
+width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;
+}
+#bandeauUser div:nth-of-type(6){
+  width:100%; height:200px; position:absolute; background-color:rgba(0,0,0,0.8);
+}
+#bigCover{
+  border-radius:50%; width:200px; height:200px; overflow:hidden; z-index:15; position:absolute;
+}
+#bigCover img{
+  height:190px;  z-index:10; position:absolute; background-color:#FFF;
+}
+.infoUser{
+  margin-left:100px;
+}
+
+/*****************************COURSES FORM*************************************/
+
+.input-group{
+  width:40%; margin:20px;
+}
+.input-group-addon{
+  width:20%;
+}
+.needField{
+  background-color:#62D1AD!important;color:#FFF!important;
+}
+.form-group{
+  width:40%; margin:20px;
+}
+.actions{
+  width:40%; margin:20px;
+}
+
+/*****************************COURSES INDEX-NEXT*******************************/
+
+
+.clear{
+  clear: both;
+}
+.classificationSearch{
+  float:left; margin: 15px 20px;
+}
+.classificationSearch a{
+  color:#000!important;font-size:18px; margin-left:15px;
+}
+.thumbnail{
+  height:300px;
+}
+.item{
+  height:100px; width:100%;overflow:hidden;
+}
+.thumbnail img{
+  max-width:255px;
+}
+.tags{
+  display:inline;
+}
+.interactionCourse{
+  position: absolute;
+  bottom: 20px;
+}
+.caption h3{
+  margin-top:10px;
+  margin-bottom:10px;
+  height:47px;
+}
+.infoCourse p:first-of-type{
+  color:#62D1AD;
+}
+
+/*****************************COURSE SINGLE************************************/
+
+#bandeau{
+  background-color:black; width:100%; height:175px; overflow: hidden; position:relative;
+}
+
+#bandeau h1 {
+  position: absolute; z-index: 2; margin-left: 35%; font-size: 50px; margin-top: 20px; color:#FFF;
+}
+#bandeau h2 {
+  position: absolute; z-index: 2; margin-left: 35%; font-size: 30px; margin-top: 70px; color:#FFF;
+}
+#bandeau h2 span {
+  color:#FFF; font-size:18px;
+}
+#bandeau div:first-of-type{
+  position: absolute; z-index: 2; margin-left: 35%; font-size: 18px; margin-top: 105px; color:#9D9D9D;
+}
+#bandeau div:nth-of-type(2){
+  position: absolute; z-index: 2; margin-left: 35%; font-size: 18px; margin-top: 130px; color:#9D9D9D;
+}
+#bandeau div:nth-of-type(3){
+  position: absolute; z-index: 2; margin-left: 85%; font-size: 18px; margin-top: 34px; color:#9D9D9D;
+}
+#bandeau div:nth-of-type(4){
+  width:40%; height:175px;margin-left:-10%; overflow:hidden; z-index:15; position:absolute;transform:skewX(170deg); border-right: 5px solid #62D1AD; background-color:#FFF;
+}
+#bandeau div:nth-of-type(5){
+  width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;
+}
+#bandeau div:nth-of-type(6){
+  width:100%; height:200px; position:absolute; background-color:rgba(0,0,0,0.8);
+}
+.courseDefaultImg{
+  max-height:190px; z-index:10; position:absolute; background-color:#FFF;transform:skewX(-170deg);margin-left:4%;
+}
+.courseImg{
+  max-height:190px; z-index:10; position:absolute; background-color:#FFF;transform:skewX(-170deg);margin-left:20%;
+}
+.backBandeau{
+  margin-top:-202px; margin-left:210px;
+}
+#cover{
+  border-radius:50%;
+  width:120px; height:120px; overflow:hidden; z-index:20; position:absolute; margin-left:80%; margin-top:-48px;
+}
+.bigDefaultAvatarImg{
+  height:112px;  z-index:10; position:absolute; background-color:#FFF;
+}
+.bigAvatarImg{
+  height:112px;  z-index:10; position:absolute; background-color:#FFF;
+}
+#cover + span {
+  margin-left:70%;  font-size:18px;
+}
+#navigation {
+  float:left; margin-top:-45px;
+}
+.classification {
+  margin-top:40px;
+}
+#participant li{
+  display:inline-block; margin-left:15px;
+}
+#participant div {
+  border-radius:50%; width:100px; height:100px; overflow:hidden; float:left;
+}
+.smallDefaultAvatarImg{
+  height:94px; background-color:#FFF;
+}
+.smallAvatarImg{
+  height:94px; background-color:#FFF;
+}
+.embed{
+  margin:0 auto; width:990px;
+}

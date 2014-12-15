@@ -18,7 +18,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= image_tag user.avatar, alt: "User picture", style: "width: 70px; height: 70px;" %></td>
+        <td><div class="indexAvatarCover" style="border: 2px solid <%= color_avatar(user) %>"><%= image_tag user.avatar, alt: "User picture" %></div></td>
         <td><%= user.first_name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.email %></td>

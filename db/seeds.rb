@@ -2,7 +2,7 @@
 # rake db:seed
 
 # Users
-User.create({
+User.create([{
   role: "Admin",
   email: "hello@john.com",
   first_name: "John",
@@ -11,13 +11,14 @@ User.create({
   password: "hello",
   password_confirmation: "hello",
   city: "New York",
-  birthdate: DateTime.new(1984, 11, 27),
+  birth_date: DateTime.new(1984, 11, 27),
   personal_link: "http://johndoe.com",
   batch: "P2009",
   avatar: "http://i.kinja-img.com/gawker-media/image/upload/s--gRG2YWja--/efg4piwisx1tcco4byit.png",
-  short_bio: "Hello this is me, Grumpy Cat, Lord of the Internets."
-})
-User.create({
+  short_bio: "Hello this is me, Grumpy Cat, Lord of the Internets.",
+  slug: "johny"
+},
+{
   role: "Utilisateur",
   email: "paulgraham@gmail.com",
   first_name: "Paul",
@@ -26,12 +27,13 @@ User.create({
   password: "ycombinator",
   password_confirmation: "ycombinator",
   city: "San Francisco",
-  birthdate: DateTime.new(1961, 5, 12),
+  birth_date: DateTime.new(1961, 5, 12),
   personal_link: "http://www.paulgraham.com",
   batch: "P2006",
   avatar: "http://ep.yimg.com/ca/I/paulgraham_2239_0",
-  short_bio: "Paul Graham, YCombinator, founder."
-})
+  short_bio: "Paul Graham, YCombinator, founder.",
+  slug: "paulo"
+}])
 
 # Categories
 Categorie.create({ name: "Code" })

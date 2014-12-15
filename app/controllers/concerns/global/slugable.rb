@@ -5,7 +5,7 @@ module Global::Slugable
     ret = str.strip.downcase
 
     #blow away apostrophes
-    ret.gsub! /['`]/,""
+    ret.gsub! /['`\.]/,""
 
     # @ --> at, and & --> and
     ret.gsub! /\s*@\s*/, " at "

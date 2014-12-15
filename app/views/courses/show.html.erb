@@ -77,9 +77,11 @@
 <% end %>
 </div>
 <div>
+<div class="embed">
   <!-- Youtube iframe -->
   <iframe width="560" height="355" src="<%= @course.video_link %>" frameborder="0" allowfullscreen></iframe>
   <!-- Slideshare iframe -->
   <iframe id="iframe-slideshare" src="" width="425" height="355" frameborder="0" scrolling="no"
   allowfullscreen data-slideshare-url="<%= @course.slideshare_link %>"></iframe>
 </div>
+<div>

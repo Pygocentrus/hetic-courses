@@ -26,6 +26,14 @@
   float:left;margin-left:10px;
 }
 
+/*****************************USER INDEX***************************************/
+
+.indexAvatarCover{
+  border-radius:50%;width:66px;height:66px; overflow:hidden;
+}.indexAvatarCover img{
+  max-height: 66px;
+}
+
 /*****************************USER SINGLE**************************************/
 
 #bandeauUser{
@@ -110,7 +118,16 @@ width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;
 }
 .interactionCourse{
   position: absolute;
-  bottom: 20px;}
+  bottom: 20px;
+}
+.caption h3{
+  margin-top:10px;
+  margin-bottom:10px;
+  height:47px;
+}
+.infoCourse p:first-of-type{
+  color:#62D1AD;
+}
 
 /*****************************COURSE SINGLE************************************/
 
@@ -184,4 +201,7 @@ width:100px; height:200px; position:absolute; background-color:#FFF; z-index:1;
 }
 .smallAvatarImg{
   height:94px; background-color:#FFF;
+}
+.embed{
+  margin:0 auto; width:990px;
 }

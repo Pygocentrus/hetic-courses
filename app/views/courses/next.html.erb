@@ -26,11 +26,11 @@
         </div>
         <div class="caption">
           <h3><%= course.title %></h3>
-          <p>
-            <%= course.date.strftime("%d/%m/%Y, %H:%M") %>
-            <%= course.level %>
-            <%= "#{course.users[0].first_name} #{course.users[0].last_name}" %>
-          </p>
+          <div class="infoCourse">
+            <p><%= course.date.strftime("%d/%m/%Y, %H:%M") %></p>
+            <%= course.level %><br>
+            <p style="color:<%= color_avatar(course.users[0]) %>;"><%= "#{course.users[0].first_name} #{course.users[0].last_name}" %></p>
+          </div>
           <div class="interactionCourse">
             <p>
               <%= link_to 'Voir', course_path(course.slug), :class => "btn btn-primary" %>

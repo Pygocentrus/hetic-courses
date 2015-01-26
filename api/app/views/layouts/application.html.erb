@@ -18,8 +18,11 @@
     <meta property="og:image" content="" />
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/png" href="" />
+
+    <base href="http://localhost:3000/">
+
     <!-- Stylesheets -->
-    <%= stylesheet_link_tag "application.css" %>
+    <link href="assets/production.css" rel="stylesheet" />
 
     <!-- CSRF -->
     <%= csrf_meta_tags %>
@@ -85,9 +88,8 @@
       </div>
       <%= yield %>
     </div>
+
     <!-- Javascripts -->
-    <%= javascript_include_tag "http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js" %>
-    <%= javascript_include_tag "webtoolkitsha1" %>
-    <%= javascript_include_tag "application" %>
+    <script type="text/javascript" src="assets/production.js"></script>
   </body>
 </html>

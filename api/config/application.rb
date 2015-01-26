@@ -19,12 +19,19 @@ module ConnexionTest
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    
+    config.assets.enabled = false
+    Rails.application.config.assets.precompile += [/.*\.js/, /.*\.css/]
 
-    config.assets.precompile += %w( bootstrap.min )
-    config.assets.css_compressor = :sass
-    config.assets.js_compressor = :uglifier
-    config.assets.precompile.shift
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'lib')
-    Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
+    config.generators do |g|
+      g.assets false
+    end
+
+    # config.assets.precompile += %w( bootstrap.min )
+    # config.assets.css_compressor = :sass
+    # config.assets.js_compressor = :uglifier
+    # config.assets.precompile.shift
+    # config.assets.paths << Rails.root.join('vendor', 'assets', 'lib')
+    # Rails.application.config.assets.precompile += [/.*\.js/,/.*\.css/]
   end
 end

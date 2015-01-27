@@ -16,6 +16,6 @@ class User < ActiveRecord::Base
   include User::SearchableConcern
 
   def as_json(options={})
-    super(:only => [:id, :first_name, :last_name, :user_name, :email])
+    super(:only => [:id, :slug, :first_name, :last_name, :user_name, :email])
   end
 end
